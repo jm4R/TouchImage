@@ -26,3 +26,6 @@ HEADERS  += view/mainview.h \
 CONFIG += mobility
 MOBILITY = 
 
+RESOURCES += \
+    resources/resources.qrc
+

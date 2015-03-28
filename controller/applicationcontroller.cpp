@@ -6,7 +6,10 @@ ApplicationController::ApplicationController(QApplication &_application, MainVie
       drawersWidget(&mainView),
       imageWidget(&mainView)
 {
-
+    QFile File(":/res/style.qss");
+    File.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(File.readAll());
+    application.setStyleSheet(styleSheet);
 }
 
 ApplicationController::~ApplicationController()
