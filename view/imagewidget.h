@@ -24,10 +24,10 @@ public:
     void openDirectory(const QString &path);
 
 protected:
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-    void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+    void resizeEvent(QResizeEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
 
 private:
     bool gestureEvent(QGestureEvent *event);
@@ -50,6 +50,9 @@ private:
     qreal horizontalOffset;
     qreal verticalOffset;
     qreal scaleFactor;
+
+signals:
+    void gestureFinished();
 };
 
 #endif

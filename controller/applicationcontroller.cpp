@@ -27,10 +27,10 @@ void ApplicationController::buildUI()
     loadIcon(leftMenuWidget.ui->brushesButton, "brush.svg", 1.0f);
     loadIcon(leftMenuWidget.ui->filtersButton, "filter.svg", 1.0f);
     loadIcon(leftMenuWidget.ui->colorsButton, "color.svg", 1.0f);
-    loadIcon(leftMenuWidget.ui->hideButton, "leftArrow.svg", 0.5f);
+    loadIcon(leftMenuWidget.ui->hideButton, "leftArrow.svg", 0.4f);
     connect(leftMenuWidget.ui->hideButton, &QToolButton::clicked, &drawersWidget, &DrawersWidget::hideDrawers);
 
-    loadIcon(rightMenuWidget.ui->hideButton, "rightArrow.svg", 0.5f);
+    loadIcon(rightMenuWidget.ui->hideButton, "rightArrow.svg", 0.4f);
     loadIcon(rightMenuWidget.ui->openButton, "openFile.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->redoButton, "redo.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->saveButton, "saveFile.svg", 1.0f);
@@ -39,10 +39,11 @@ void ApplicationController::buildUI()
     connect(rightMenuWidget.ui->undoButton, &QToolButton::clicked, &drawersWidget, &DrawersWidget::hideDrawers);
     connect(rightMenuWidget.ui->redoButton, &QToolButton::clicked, &drawersWidget, &DrawersWidget::hideDrawers);
 
-    int menuWidth = screenAdapter.cmToPx(3);
+    int menuWidth = screenAdapter.cmToPx(2.5);
     drawersWidget.setLeftWidget(&leftMenuWidget, menuWidth);
     drawersWidget.setRightWidget(&rightMenuWidget, menuWidth);
-    drawersWidget.setHandlerWidth(screenAdapter.cmToPx(0.5));
+    drawersWidget.setHandlerWidth(screenAdapter.cmToPx(0.25));
+
     mainView.setCentralWidget(&drawersWidget);
 
     //MOCK{

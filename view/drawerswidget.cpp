@@ -16,7 +16,11 @@ DrawersWidget::DrawersWidget(QWidget *parent) :
     state(STATE_LAZY),
     layoutState(LS_BOTH_HIDDEN)
 {
+#ifndef Q_OS_ANDROID
     QScroller::grabGesture(this, QScroller::LeftMouseButtonGesture);
+#else
+    QScroller::grabGesture(this, QScroller::TouchGesture);
+#endif
     scroller = QScroller::scroller(this);
     QScrollerProperties scrollerProperties;
     scrollerProperties.setScrollMetric(QScrollerProperties::SnapPositionRatio, 0.1);
@@ -50,7 +54,8 @@ bool DrawersWidget::event(QEvent *event)
                 return true;
             }
         }
-
+        event->accept();
+        return true;
     } else if (event->type() == QEvent::Scroll) {
         QScrollEvent *se = static_cast<QScrollEvent *>(event);
         switch (state) {
@@ -63,8 +68,6 @@ bool DrawersWidget::event(QEvent *event)
             handleRightDragging(se);
             return true;
         }
-    } else if (event->type() == QEvent::MouseButtonRelease) {
-        hideDrawers();
     }
     return QWidget::event(event);
 }
@@ -75,7 +78,7 @@ void DrawersWidget::prepareLeftScroller(QScrollPrepareEvent *event)
     snapPositions << leftWidgetWidth;
     snapPositions << 0;
     scroller->setSnapPositionsX(snapPositions);
-    event->setViewportSize(QSize(20,0));
+    event->setViewportSize(QSize(0,0));
     event->setContentPosRange(QRect(0, 0, leftWidgetWidth, 0));
     int start = (layoutState != LS_LEFT_VISIBLE) ? leftWidgetWidth : 0;
     event->setContentPos(QPointF(start,0));
@@ -99,7 +102,7 @@ void DrawersWidget::prepareRightScroller(QScrollPrepareEvent *event)
     snapPositions << 0;
     snapPositions << rightWidgetWidth;
     scroller->setSnapPositionsX(snapPositions);
-    event->setViewportSize(QSize(20,0));
+    event->setViewportSize(QSize(0,0));
     event->setContentPosRange(QRect(0, 0, rightWidgetWidth, 0));
     int start = (layoutState != LS_RIGHT_VISIBLE) ? 0 : rightWidgetWidth;
     event->setContentPos(QPointF(start,0));
@@ -206,7 +209,7 @@ void DrawersWidget::setTopWidgetToLeft(QWidget *value)
     //MOCK{
     if (topWidgetToLeft != 0) return;
     value = new QWidget();
-    value->setPalette(QPalette(QColor(0,0,50, 196)));
+    value->setPalette(QPalette(QColor(0,0,0, 196)));
     value->setAutoFillBackground(true);
     //}MOCK
     topWidgetToLeft = value;

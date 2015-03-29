@@ -21,7 +21,7 @@ bool ImageWidget::event(QEvent *event)
     return QWidget::event(event);
 }
 
-void ImageWidget::paintEvent(QPaintEvent*)
+void ImageWidget::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
 
@@ -35,14 +35,17 @@ void ImageWidget::paintEvent(QPaintEvent*)
     p.scale(scaleFactor, scaleFactor);
     p.translate(-iw/2, -ih/2);
     p.drawImage(0, 0, currentImage);
+
+    event->accept();
 }
 
-void ImageWidget::mouseDoubleClickEvent(QMouseEvent *)
+void ImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
     scaleFactor = 1;
     verticalOffset = 0;
     horizontalOffset = 0;
     update();
+    event->accept();
 }
 
 bool ImageWidget::gestureEvent(QGestureEvent *event)
@@ -51,6 +54,7 @@ bool ImageWidget::gestureEvent(QGestureEvent *event)
         panTriggered(static_cast<QPanGesture *>(pan));
     if (QGesture *pinch = event->gesture(Qt::PinchGesture))
         pinchTriggered(static_cast<QPinchGesture *>(pinch));
+    event->accept();
     return true;
 }
 
@@ -60,6 +64,10 @@ void ImageWidget::panTriggered(QPanGesture *gesture)
     horizontalOffset += delta.x();
     verticalOffset += delta.y();
     update();
+    if (gesture->state() == Qt::GestureFinished) {
+        emit gestureFinished();
+        releaseMouse();
+    }
 }
 
 void ImageWidget::pinchTriggered(QPinchGesture *gesture)
@@ -69,11 +77,16 @@ void ImageWidget::pinchTriggered(QPinchGesture *gesture)
         scaleFactor *= gesture->scaleFactor();
     }
     update();
+    if (gesture->state() == Qt::GestureFinished) {
+        emit gestureFinished();
+        releaseMouse();
+    }
 }
 
-void ImageWidget::resizeEvent(QResizeEvent*)
+void ImageWidget::resizeEvent(QResizeEvent *event)
 {
     update();
+    event->accept();
 }
 
 void ImageWidget::openDirectory(const QString &path)
@@ -91,7 +104,6 @@ void ImageWidget::openDirectory(const QString &path)
 
 QImage ImageWidget::loadImage(const QString &fileName)
 {
-    qDebug() << position << files << fileName;
     QImageReader reader(fileName);
     if (!reader.canRead()) {
         return QImage();
@@ -101,9 +113,7 @@ QImage ImageWidget::loadImage(const QString &fileName)
     if (!reader.read(&image)) {
         return QImage();
     }
-    const QSize maximumSize(2000, 2000); // Reduce in case someone has large photo images.
-    if (image.size().width() > maximumSize.width() || image.height() > maximumSize.height())
-        image = image.scaled(maximumSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
     return image;
 }
 
