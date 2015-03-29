@@ -150,10 +150,7 @@ void DrawersWidget::hideDrawers()
 void DrawersWidget::resizeEvent(QResizeEvent *event)
 {
     //MOCK{
-    setLeftWidget(0, 400);
-    setRightWidget(0, 400);
     setTopWidgetToLeft(0);
-    setTopWidgetToRight(0);
     //}MOCK
     updateUI();
 }
@@ -166,6 +163,7 @@ int DrawersWidget::getHandlerWidth() const
 void DrawersWidget::setHandlerWidth(int value)
 {
     handlerWidth = value;
+    updateUI();
 }
 
 QWidget *DrawersWidget::getLeftWidget() const
@@ -175,13 +173,6 @@ QWidget *DrawersWidget::getLeftWidget() const
 
 void DrawersWidget::setLeftWidget(QWidget *value, int widgetWidth)
 {
-    //MOCK{
-    if (leftWidget != 0) return;
-    value = new QWidget();
-    value->setPalette(QPalette(QColor(0,0,0, 196)));
-    value->setAutoFillBackground(true);
-    value->setFixedWidth(400);
-    //}MOCK
     leftWidget = value;
     leftWidgetWidth = widgetWidth;
     updateUI();
@@ -189,13 +180,6 @@ void DrawersWidget::setLeftWidget(QWidget *value, int widgetWidth)
 
 void DrawersWidget::setRightWidget(QWidget *value, int widgetWidth)
 {
-    //MOCK{
-    if (rightWidget != 0) return;
-    value = new QWidget();
-    value->setPalette(QPalette(QColor(0,0,0, 196)));
-    value->setAutoFillBackground(true);
-    value->setFixedWidth(400);
-    //}MOCK
     rightWidget = value;
     rightWidgetWidth = widgetWidth;
     updateUI();
@@ -208,12 +192,6 @@ QWidget *DrawersWidget::getTopWidgetToRight() const
 
 void DrawersWidget::setTopWidgetToRight(QWidget *value)
 {
-    //MOCK{
-    //if (topWidgetToRight != 0) return;
-    //value = new QWidget();
-    //value->setPalette(QPalette(QColor(0,0,0, 196)));
-    //value->setAutoFillBackground(true);
-    //}MOCK
     topWidgetToRight = value;
     updateUI();
 }
