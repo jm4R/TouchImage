@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     model/filter.cpp \
     model/filterprocess.cpp \
     model/colorfilter.cpp \
-    model/grayscalefilter.cpp
+    model/grayscalefilter.cpp \
+    controller/toolsprovider.cpp \
+    view/filterwidget.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -35,7 +37,9 @@ HEADERS  += view/mainview.h \
     model/filter.h \
     model/filterprocess.h \
     model/colorfilter.h \
-    model/grayscalefilter.h
+    model/grayscalefilter.h \
+    controller/toolsprovider.h \
+    view/filterwidget.h
 
 CONFIG += mobility
 MOBILITY = 
@@ -45,6 +49,7 @@ RESOURCES += \
 
 FORMS += \
     view/leftmenuwidget.ui \
-    view/rightmenuwidget.ui
+    view/rightmenuwidget.ui \
+    view/filterwidget.ui
 
 CONFIG += c++11

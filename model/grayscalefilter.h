@@ -5,7 +5,7 @@
 class GrayscaleFilter : public ColorFilter
 {
 public:
-    GrayscaleFilter();
+    GrayscaleFilter(QObject *parent = 0);
     ~GrayscaleFilter();
 protected:
     uint processPixel(uint pixel);

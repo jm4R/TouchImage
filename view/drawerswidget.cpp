@@ -150,11 +150,8 @@ void DrawersWidget::hideDrawers()
 }
 //----------------------EVENTS
 
-void DrawersWidget::resizeEvent(QResizeEvent *event)
+void DrawersWidget::resizeEvent(QResizeEvent *)
 {
-    //MOCK{
-    setTopWidgetToLeft(0);
-    //}MOCK
     updateUI();
 }
 
@@ -206,12 +203,6 @@ QWidget *DrawersWidget::getTopWidgetToLeft() const
 
 void DrawersWidget::setTopWidgetToLeft(QWidget *value)
 {
-    //MOCK{
-    if (topWidgetToLeft != 0) return;
-    value = new QWidget();
-    value->setPalette(QPalette(QColor(0,0,0, 196)));
-    value->setAutoFillBackground(true);
-    //}MOCK
     topWidgetToLeft = value;
     updateUI();
 }

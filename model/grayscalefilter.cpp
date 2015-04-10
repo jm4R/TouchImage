@@ -1,6 +1,6 @@
 #include "grayscalefilter.h"
 
-GrayscaleFilter::GrayscaleFilter()
+GrayscaleFilter::GrayscaleFilter(QObject *parent) : ColorFilter(parent)
 {
 
 }

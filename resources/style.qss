@@ -1,8 +1,14 @@
 QMainWindow, DrawersWidget {
     background : qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(20,20,20), stop:0.5 rgb(70,70,70), stop:1 rgb(20,20,20) );
 }
-LeftMenuWidget, RightMenuWidget {
-    background-color : rgba(0,0,0,196);
+ImageWidget {
+    background-color : rgba(120,0,0,0);
+}
+.QWidget, .QFrame, .QLabel, .QScrollArea {
+    background-color : rgba(0,0,0,0);
+}
+LeftMenuWidget, RightMenuWidget, FilterWidget {
+    background-color : rgba(0,0,0,220);
 }
 QToolButton {
     background-color : rgba(0,0,0,0);
