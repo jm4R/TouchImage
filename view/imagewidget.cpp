@@ -104,3 +104,8 @@ bool ImageWidget::loadImage(const QString &fileName)
     update();
     return true;
 }
+
+QImage *ImageWidget::getImage()
+{
+    return &currentImage;
+}

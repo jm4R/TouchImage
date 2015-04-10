@@ -9,6 +9,10 @@
 #include "view/rightmenuwidget.h"
 #include "view/screenadapter.h"
 
+//MOCK{
+#include "model/grayscalefilter.h"
+//}MOCK
+
 
 class ApplicationController : public QObject
 {

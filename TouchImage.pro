@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     controller/applicationcontroller.cpp \
     view/leftmenuwidget.cpp \
     view/screenadapter.cpp \
-    view/rightmenuwidget.cpp
+    view/rightmenuwidget.cpp \
+    model/filter.cpp \
+    model/filterprocess.cpp \
+    model/colorfilter.cpp \
+    model/grayscalefilter.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -27,7 +31,11 @@ HEADERS  += view/mainview.h \
     controller/applicationcontroller.h \
     view/leftmenuwidget.h \
     view/screenadapter.h \
-    view/rightmenuwidget.h
+    view/rightmenuwidget.h \
+    model/filter.h \
+    model/filterprocess.h \
+    model/colorfilter.h \
+    model/grayscalefilter.h
 
 CONFIG += mobility
 MOBILITY = 

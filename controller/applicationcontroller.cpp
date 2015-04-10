@@ -48,6 +48,10 @@ void ApplicationController::buildUI()
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFile);
+    Filter *grayscaleFilter = new GrayscaleFilter;
+    grayscaleFilter->setImage(imageWidget.getImage());
+    connect(leftMenuWidget.ui->filtersButton, &QToolButton::clicked, grayscaleFilter, &Filter::process);
+    connect(grayscaleFilter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
     //}MOCK
 }
 
