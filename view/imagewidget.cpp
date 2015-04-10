@@ -89,40 +89,18 @@ void ImageWidget::resizeEvent(QResizeEvent *event)
     event->accept();
 }
 
-void ImageWidget::openDirectory(const QString &path)
-{
-    this->path = path;
-    QDir dir(path);
-    QStringList nameFilters;
-    nameFilters << "*.jpg" << "*.png";
-    files = dir.entryList(nameFilters, QDir::Files|QDir::Readable, QDir::Name);
-
-    position = 0;
-    goToImage(0);
-    update();
-}
-
-QImage ImageWidget::loadImage(const QString &fileName)
+bool ImageWidget::loadImage(const QString &fileName)
 {
     QImageReader reader(fileName);
     if (!reader.canRead()) {
-        return QImage();
+        return false;
     }
 
     QImage image;
     if (!reader.read(&image)) {
-        return QImage();
+        return false;
     }
-
-    return image;
-}
-
-void ImageWidget::goToImage(int index)
-{
-    if (files.isEmpty())
-        return;
-
-    position = index;
-    currentImage = loadImage(path+QLatin1String("/")+files.at(position));
+    currentImage = image;
     update();
+    return true;
 }

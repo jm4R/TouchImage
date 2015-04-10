@@ -47,13 +47,8 @@ void ApplicationController::buildUI()
     mainView.setCentralWidget(&drawersWidget);
 
     //MOCK{
-    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
-    const QString directory =
-        QFileDialog::getExistingDirectory(&mainView, "Select image folder",
-                                          picturesLocations.isEmpty() ? QString() : picturesLocations.front());
-    imageWidget.openDirectory(directory);
+    connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFile);
     //}MOCK
-    //Insert your code here
 }
 
 void ApplicationController::loadIcon(QToolButton *button, QString resourceName, float sizeCm)
@@ -61,6 +56,15 @@ void ApplicationController::loadIcon(QToolButton *button, QString resourceName, 
     QPixmap iconPixmap = screenAdapter.loadSvg(":/res/icons/" + resourceName, sizeCm);
     button->setIconSize(iconPixmap.size());
     button->setIcon(iconPixmap);
+}
+
+void ApplicationController::openFile()
+{
+    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+    const QString fileName =
+        QFileDialog::getOpenFileName(&mainView, "Select image folder",
+                                          picturesLocations.isEmpty() ? QString() : picturesLocations.front(), "Obrazy (*.png *.xpm *.jpg *.jpeg *.bmp);; Wszystkie pliki (*)");
+    imageWidget.loadImage(fileName);
 }
 
 int ApplicationController::executeApplication()

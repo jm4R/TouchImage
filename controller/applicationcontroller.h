@@ -29,6 +29,10 @@ private:
 
     void buildUI();
     void loadIcon(QToolButton *button, QString resourceName, float sizeCm);
+
+public slots:
+    //TODO temp
+    void openFile();
 };
 
 #endif // APPLICATIONaa_H

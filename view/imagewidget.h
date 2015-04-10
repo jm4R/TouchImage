@@ -21,7 +21,7 @@ class ImageWidget : public QWidget
 
 public:
     ImageWidget(QWidget *parent = 0);
-    void openDirectory(const QString &path);
+    bool loadImage(const QString &fileName);
 
 protected:
     bool event(QEvent *event);
@@ -37,9 +37,6 @@ private:
 //! [class definition begin]
 
     void updateImage();
-    QImage loadImage(const QString &fileName);
-    void loadImage();
-    void goToImage(int index);
 
     QString path;
     QStringList files;
