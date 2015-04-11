@@ -52,13 +52,14 @@ void ApplicationController::buildUI()
     QImage exampleImage = screenAdapter.loadRaster(":/res/icons/example.jpg", 2.0f);
     filterWidget.setMenuHeight(menuWidth);
     filterWidget.putButtonGroup(toolsProvider.generateButtonGroup(exampleImage));
+    connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
-    Filter *grayscaleFilter = new GrayscaleFilter;
-    grayscaleFilter->setImage(imageWidget.getImage());
-    connect(leftMenuWidget.ui->filtersButton, &QToolButton::clicked, grayscaleFilter, &Filter::process);
-    connect(grayscaleFilter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
+    //Filter *grayscaleFilter = new GrayscaleFilter;
+    //grayscaleFilter->setImage(imageWidget.getImage());
+    //connect(leftMenuWidget.ui->filtersButton, &QToolButton::clicked, grayscaleFilter, &Filter::process);
+    //connect(grayscaleFilter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
     //}MOCK
 }
 
@@ -76,6 +77,7 @@ void ApplicationController::openFileButtonClicked()
         QFileDialog::getOpenFileName(&mainView, "Select image folder",
                                           picturesLocations.isEmpty() ? QString() : picturesLocations.front(), "Obrazy (*.png *.xpm *.jpg *.jpeg *.bmp);; Wszystkie pliki (*)");
     imageWidget.loadImage(fileName);
+    filterWidget.setImage(imageWidget.getImage());
 }
 
 void ApplicationController::brushesButtonClicked()

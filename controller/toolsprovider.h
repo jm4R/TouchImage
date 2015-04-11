@@ -19,7 +19,7 @@ public:
     QButtonGroup &generateButtonGroup(const QImage &iconImage);
 
 signals:
-
+    void currentFilterChanged(Filter *filter);
 public slots:
 
 private slots:

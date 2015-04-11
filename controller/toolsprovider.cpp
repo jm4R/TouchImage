@@ -1,5 +1,6 @@
 #include "toolsprovider.h"
 #include "model/grayscalefilter.h"
+#include <QVariant>
 
 ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
     filtersCount(0)
@@ -23,7 +24,7 @@ ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
 
 ToolsProvider::~ToolsProvider()
 {
-
+    qDeleteAll(filters);
 }
 
 const QList<Filter *> ToolsProvider::getFilters() const
@@ -36,6 +37,7 @@ QButtonGroup& ToolsProvider::generateButtonGroup(const QImage &iconImage)
     if (buttonGroup.buttons().empty()) {
         for (int i=0; i<filtersCount; i++) {
             QToolButton *newButton = new QToolButton();
+            newButton->setProperty("style", QVariant("pickFilterButton"));
             QImage filteredImage = iconImage.copy();
             filters[i]->setImage(&filteredImage);
             filters[i]->process();
@@ -46,6 +48,8 @@ QButtonGroup& ToolsProvider::generateButtonGroup(const QImage &iconImage)
             newButton->setIconSize(icon.size());
             newButton->setCheckable(true);
             newButton->setChecked( filters[i] == currentFilter );
+            newButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+            newButton->setText("nazwa");
             buttonGroup.addButton(newButton, i);
         }
         connect(&buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(changeCurrentFilter(int)));
@@ -56,6 +60,7 @@ QButtonGroup& ToolsProvider::generateButtonGroup(const QImage &iconImage)
 void ToolsProvider::changeCurrentFilter(int id)
 {
     currentFilter = filters[id];
+    emit currentFilterChanged(currentFilter);
     //TODO emit
 }
 

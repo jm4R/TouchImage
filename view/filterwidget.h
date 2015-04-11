@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QButtonGroup>
 #include <QScroller>
+#include "model/filter.h"
 
 namespace Ui {
 class FilterWidget;
@@ -21,8 +22,15 @@ public:
     void putButtonGroup(const QButtonGroup &buttonGroup);
     void setMenuHeight(int newHeight);
 
+public slots:
+    void setFilter(Filter *newFilter);
+    void setImage(const QImage *newImage);
+
 private:
+    void refreshMiniature();
     Ui::FilterWidget *ui;
+    Filter *filter;
+    const QImage *image;
 };
 
 #endif // FILTERWIDGET_H

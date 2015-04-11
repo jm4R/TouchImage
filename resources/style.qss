@@ -10,8 +10,17 @@ ImageWidget {
 LeftMenuWidget, RightMenuWidget, FilterWidget {
     background-color : rgba(0,0,0,220);
 }
+[style="pickFilterButton"] {
+    background-color : qlineargradient(x1:0, y1:0.5, x2:1, y2:0.5, stop:0 rgb(100,100,100), stop:0.04 rgba(0,0,0,0), stop:0.96 rgba(0,0,0,0), stop:1 rgb(100,100,100) );
+}
+[style="pickFilterButton"]:checked {
+    background-color : rgb(255,100,0);
+    font: bold;
+}
+
 QToolButton {
     background-color : rgba(0,0,0,0);
+    color : white;
     border : none;
 }
 QToolButton:pressed {
