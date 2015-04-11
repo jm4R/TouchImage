@@ -4,6 +4,7 @@ class Filter;
 
 #include <QObject>
 #include <QSharedPointer>
+#include <QMutex>
 #include "filterprocess.h"
 
 class Filter : public QObject
@@ -18,6 +19,7 @@ public:
     void setImage(QImage *value);
 
     void process();
+    void wait();
 
 signals:
     void startProcesses();
@@ -33,6 +35,8 @@ private:
     static QList<FilterProcessPointer> filterProcessPool;
     static int threadCount;
     int threadRuns;
+    QMutex processMutex;
+    QMutex handleMutex;
 };
 
 #endif // FILTER_H

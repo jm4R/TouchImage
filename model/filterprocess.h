@@ -23,6 +23,7 @@ public slots:
     void startThread();
     void run();
     void freeThread();
+    void waitForThread();
 
 private:
     int threadNumber;

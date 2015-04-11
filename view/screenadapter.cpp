@@ -1,5 +1,6 @@
 #include "screenadapter.h"
 #include <QSvgRenderer>
+#include <QImageReader>
 #include <QPainter>
 
 ScreenAdapter::ScreenAdapter(QObject *parent) : QObject(parent), screen(qApp->primaryScreen())
@@ -38,5 +39,24 @@ QPixmap ScreenAdapter::loadSvg(QString resourceName, float maxWidthCm, float max
     renderer.render(&painter, result.rect());
 
     return qMove(result);
+}
+
+QImage ScreenAdapter::loadRaster(QString resourceName, float maxWidthCm, float maxHeightCm)
+{
+    QImageReader imageReader(resourceName);
+    QSize defaultSize = imageReader.size();
+    double widthToHeightFactor = double(defaultSize.width()) / defaultSize.height();
+    double requestedWidthToHeight = double(maxWidthCm) / maxHeightCm;
+    float width, height;
+    if (widthToHeightFactor < requestedWidthToHeight) {
+        height = cmToPx(maxHeightCm);
+        width = widthToHeightFactor * height;
+    } else {
+        width = cmToPx(maxWidthCm);
+        height = width / widthToHeightFactor;
+    }
+
+    imageReader.setScaledSize(QSize(width,height));
+    return imageReader.read();
 }
 

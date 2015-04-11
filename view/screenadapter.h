@@ -16,6 +16,7 @@ public:
 
     int cmToPx(float cm);
     QPixmap loadSvg(QString resourceName, float maxWidthCm, float maxHeightCm = FLT_MAX);
+    QImage loadRaster(QString resourceName, float maxWidthCm, float maxHeightCm = FLT_MAX);
 
 private:
     static constexpr float INCH_PER_CM = 2.54f;

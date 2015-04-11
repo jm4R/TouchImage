@@ -10,5 +10,6 @@
         <file>icons/redo.svg</file>
         <file>icons/saveFile.svg</file>
         <file>icons/undo.svg</file>
+        <file>icons/example.jpg</file>
     </qresource>
 </RCC>

@@ -1,4 +1,5 @@
 #include "filterprocess.h"
+#include <QDebug>
 
 FilterProcess::FilterProcess(int threadNumber, int threadCount)
 {
@@ -35,12 +36,15 @@ void FilterProcess::run()
     for (int j=start; j<stop; j++) {
         filter->processLine(j);
     }
-
     emit ready();
 }
 
 void FilterProcess::freeThread()
 {
     thread.quit();
+}
+
+void FilterProcess::waitForThread()
+{
     thread.wait();
 }

@@ -49,6 +49,10 @@ void ApplicationController::buildUI()
 
     mainView.setCentralWidget(&drawersWidget);
 
+    QImage exampleImage = screenAdapter.loadRaster(":/res/icons/example.jpg", 2.0f);
+    filterWidget.setMenuHeight(menuWidth);
+    filterWidget.putButtonGroup(toolsProvider.generateButtonGroup(exampleImage));
+
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
     Filter *grayscaleFilter = new GrayscaleFilter;

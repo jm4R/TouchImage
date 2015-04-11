@@ -16,7 +16,7 @@ public:
     ~ToolsProvider();
 
     const QList<Filter *> getFilters() const;
-    QButtonGroup &generateButtonGroup();
+    QButtonGroup &generateButtonGroup(const QImage &iconImage);
 
 signals:
 

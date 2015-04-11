@@ -1,4 +1,5 @@
 #include "filter.h"
+#include <QDebug>
 
 //static begin
 QList<Filter::FilterProcessPointer> Filter::filterProcessPool;
@@ -37,19 +38,29 @@ void Filter::setImage(QImage *value)
 
 void Filter::process()
 {
+    processMutex.lock();
     for (int i=0; i<threadCount; i++) {
         FilterProcessPointer filterProcess = filterProcessPool[i];
         filterProcess->setFilter(this);
         connect(this, &Filter::startProcesses, filterProcess.data(), &FilterProcess::run);
-        connect(filterProcess.data(), &FilterProcess::ready, this, &Filter::handleProcessReady);
+        connect(filterProcess.data(), &FilterProcess::ready, this, &Filter::handleProcessReady, Qt::DirectConnection);
         filterProcess->startThread();
     }
     threadRuns = threadCount;
     emit startProcesses();
 }
 
+void Filter::wait()
+{
+    for (int i=0; i<threadCount; i++) {
+        FilterProcessPointer filterProcess = filterProcessPool[i];
+        filterProcess->waitForThread();
+    }
+}
+
 void Filter::handleProcessReady()
 {
+    handleMutex.lock();
     threadRuns--;
     if (threadRuns == 0) {
         emit ready();
@@ -59,7 +70,9 @@ void Filter::handleProcessReady()
             disconnect(this, 0, filterProcess.data(), 0);
             disconnect(filterProcess.data(), 0, this, 0);
         }
+        processMutex.unlock();
     }
+    handleMutex.unlock();
 }
 
 
