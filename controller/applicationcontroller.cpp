@@ -49,18 +49,13 @@ void ApplicationController::buildUI()
 
     mainView.setCentralWidget(&drawersWidget);
 
-    QImage exampleImage = screenAdapter.loadRaster(":/res/icons/example.jpg", 2.0f);
-    filterWidget.setMenuHeight(menuWidth);
+    QImage exampleImage = screenAdapter.loadRaster(":/res/icons/example.jpg", 5.0f, 1.5f);
     filterWidget.putButtonGroup(toolsProvider.generateButtonGroup(exampleImage));
     connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
     connect(&filterWidget, SIGNAL(filterInvoked()), this, SLOT(filterInvoked()));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
-    //Filter *grayscaleFilter = new GrayscaleFilter;
-    //grayscaleFilter->setImage(imageWidget.getImage());
-    //connect(leftMenuWidget.ui->filtersButton, &QToolButton::clicked, grayscaleFilter, &Filter::process);
-    //connect(grayscaleFilter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
     //}MOCK
 }
 
@@ -99,6 +94,9 @@ void ApplicationController::filterButtonsClicked()
 void ApplicationController::filterInvoked()
 {
     Filter *filter = toolsProvider.getCurrentFilter();
+    if (!filter) {
+        return;
+    }
     filter->setImage(imageWidget.getImage());
     filter->process();
     connect(filter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );

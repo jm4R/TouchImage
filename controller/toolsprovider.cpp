@@ -1,15 +1,17 @@
 #include "toolsprovider.h"
 #include "model/grayscalefilter.h"
 #include "model/sepiafilter.h"
+#include "model/negativefilter.h"
 #include <QVariant>
 
 ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
     filtersCount(0)
 {
     QList<Filter *> *_filters = const_cast< QList<Filter *> *>(&filters);
+    _filters->append(0);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
-    _filters->append(new GrayscaleFilter);
+    _filters->append(new NegativeFilter);
     _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
@@ -40,9 +42,11 @@ QButtonGroup& ToolsProvider::generateButtonGroup(const QImage &iconImage)
             QToolButton *newButton = new QToolButton();
             newButton->setProperty("style", QVariant("pickFilterButton"));
             QImage filteredImage = iconImage.copy();
-            filters[i]->setImage(&filteredImage);
-            filters[i]->process();
-            filters[i]->wait();
+            if (filters[i]) {
+                filters[i]->setImage(&filteredImage);
+                filters[i]->process();
+                filters[i]->wait();
+            }
             QPixmap icon;
             icon.convertFromImage(filteredImage);
             newButton->setIcon(icon);

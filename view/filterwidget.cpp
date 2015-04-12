@@ -10,6 +10,10 @@ FilterWidget::FilterWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     QScroller::grabGesture(ui->menuScrollArea, QScroller::LeftMouseButtonGesture);
+    scroller = QScroller::scroller(this);
+    QScrollerProperties scrollerProperties;
+    scrollerProperties.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
+    scroller->setScrollerProperties(scrollerProperties);
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(filterInvoked()));
 }
 
@@ -26,8 +30,7 @@ void FilterWidget::putButtonGroup(const QButtonGroup &buttonGroup)
     }
     foreach(QAbstractButton *button, buttonGroup.buttons()) {
         button->setParent(ui->menuScrollArea);
-        button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-        button->setMinimumWidth(ui->menuScrollArea->minimumHeight());
+        button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
         widget->layout()->addWidget(button);
     }
     repaint();
@@ -52,15 +55,16 @@ void FilterWidget::setImage(const QImage *newImage)
 
 void FilterWidget::refreshMiniature()
 {
-    if (!filter || !image) {
-        return;
-    }
-    QImage filteredImage = image->scaled(ui->label->size(), Qt::KeepAspectRatio);
-    filter->setImage(&filteredImage);
-    filter->process();
-    filter->wait();
     QPixmap miniature;
-    miniature.convertFromImage(filteredImage);
+    if (image) {
+        QImage filteredImage = image->scaled(ui->label->size(), Qt::KeepAspectRatio);
+        if (filter) {
+            filter->setImage(&filteredImage);
+            filter->process();
+            filter->wait();
+        }
+        miniature.convertFromImage(filteredImage);
+    }
     ui->label->setPixmap(miniature);
     repaint();
 }

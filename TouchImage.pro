@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     model/grayscalefilter.cpp \
     controller/toolsprovider.cpp \
     view/filterwidget.cpp \
-    model/sepiafilter.cpp
+    model/sepiafilter.cpp \
+    model/negativefilter.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -41,7 +42,8 @@ HEADERS  += view/mainview.h \
     model/grayscalefilter.h \
     controller/toolsprovider.h \
     view/filterwidget.h \
-    model/sepiafilter.h
+    model/sepiafilter.h \
+    model/negativefilter.h
 
 CONFIG += mobility
 MOBILITY = 
