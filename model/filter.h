@@ -21,6 +21,8 @@ public:
     void process();
     void wait();
 
+    QString getName() const;
+
 signals:
     void startProcesses();
     void ready();
@@ -28,6 +30,7 @@ private slots:
     void handleProcessReady();
 protected:
     virtual void processLine(int lineNumber)=0;
+    QString name;
     QImage *image;
 
 private:

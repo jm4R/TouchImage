@@ -2,7 +2,7 @@
 
 GrayscaleFilter::GrayscaleFilter(QObject *parent) : ColorFilter(parent)
 {
-
+    name = tr("Desaturacja");
 }
 
 GrayscaleFilter::~GrayscaleFilter()

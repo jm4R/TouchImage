@@ -74,5 +74,9 @@ void Filter::handleProcessReady()
     }
     handleMutex.unlock();
 }
+QString Filter::getName() const
+{
+    return name;
+}
 
 

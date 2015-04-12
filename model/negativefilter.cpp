@@ -2,7 +2,7 @@
 
 NegativeFilter::NegativeFilter()
 {
-
+    name = tr("Negatyw");
 }
 
 NegativeFilter::~NegativeFilter()

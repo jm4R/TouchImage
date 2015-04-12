@@ -2,6 +2,7 @@
 #define COLORFILTER_H
 
 #include <QObject>
+#include <QColor>
 #include "filter.h"
 
 class ColorFilter : public Filter

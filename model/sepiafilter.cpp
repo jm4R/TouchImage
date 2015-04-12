@@ -2,7 +2,7 @@
 
 SepiaFilter::SepiaFilter()
 {
-
+    name = tr("Sepia");
 }
 
 SepiaFilter::~SepiaFilter()

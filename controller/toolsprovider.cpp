@@ -2,6 +2,7 @@
 #include "model/grayscalefilter.h"
 #include "model/sepiafilter.h"
 #include "model/negativefilter.h"
+#include "model/saturatefilter.h"
 #include <QVariant>
 
 ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
@@ -12,14 +13,17 @@ ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
     _filters->append(new NegativeFilter);
-    _filters->append(new SepiaFilter);
+    _filters->append(new SaturateFilter);
+    _filters->append(0);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
+    _filters->append(new NegativeFilter);
+    _filters->append(new SaturateFilter);
+    _filters->append(0);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
-    _filters->append(new GrayscaleFilter);
-    _filters->append(new SepiaFilter);
-    _filters->append(new GrayscaleFilter);
+    _filters->append(new NegativeFilter);
+    _filters->append(new SaturateFilter);
 
     currentFilter = filters[0];
     *(const_cast<int *> (&filtersCount)) = filters.count();
@@ -54,7 +58,7 @@ QButtonGroup& ToolsProvider::generateButtonGroup(const QImage &iconImage)
             newButton->setCheckable(true);
             newButton->setChecked( filters[i] == currentFilter );
             newButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-            newButton->setText("nazwa");
+            newButton->setText(filters[i] ? filters[i]->getName() : tr("Brak"));
             buttonGroup.addButton(newButton, i);
         }
         connect(&buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(changeCurrentFilter(int)));
@@ -66,7 +70,6 @@ void ToolsProvider::changeCurrentFilter(int id)
 {
     currentFilter = filters[id];
     emit currentFilterChanged(currentFilter);
-    //TODO emit
 }
 Filter *ToolsProvider::getCurrentFilter() const
 {
