@@ -50,6 +50,7 @@ public slots:
     void brushesButtonClicked();
     void colorsButtonClicked();
     void filterButtonsClicked();
+    void filterInvoked();
 };
 
 #endif // APPLICATIONaa_H

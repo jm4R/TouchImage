@@ -10,6 +10,7 @@ FilterWidget::FilterWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     QScroller::grabGesture(ui->menuScrollArea, QScroller::LeftMouseButtonGesture);
+    connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(filterInvoked()));
 }
 
 FilterWidget::~FilterWidget()

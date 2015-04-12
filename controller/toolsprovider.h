@@ -18,6 +18,8 @@ public:
     const QList<Filter *> getFilters() const;
     QButtonGroup &generateButtonGroup(const QImage &iconImage);
 
+    Filter *getCurrentFilter() const;
+
 signals:
     void currentFilterChanged(Filter *filter);
 public slots:

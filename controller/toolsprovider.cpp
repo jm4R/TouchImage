@@ -1,5 +1,6 @@
 #include "toolsprovider.h"
 #include "model/grayscalefilter.h"
+#include "model/sepiafilter.h"
 #include <QVariant>
 
 ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
@@ -7,15 +8,15 @@ ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
 {
     QList<Filter *> *_filters = const_cast< QList<Filter *> *>(&filters);
     _filters->append(new GrayscaleFilter);
+    _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
+    _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
+    _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
+    _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
-    _filters->append(new GrayscaleFilter);
-    _filters->append(new GrayscaleFilter);
-    _filters->append(new GrayscaleFilter);
-    _filters->append(new GrayscaleFilter);
-    _filters->append(new GrayscaleFilter);
+    _filters->append(new SepiaFilter);
     _filters->append(new GrayscaleFilter);
 
     currentFilter = filters[0];
@@ -63,5 +64,8 @@ void ToolsProvider::changeCurrentFilter(int id)
     emit currentFilterChanged(currentFilter);
     //TODO emit
 }
-
+Filter *ToolsProvider::getCurrentFilter() const
+{
+    return currentFilter;
+}
 

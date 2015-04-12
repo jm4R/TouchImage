@@ -22,6 +22,8 @@ public:
     void putButtonGroup(const QButtonGroup &buttonGroup);
     void setMenuHeight(int newHeight);
 
+signals:
+    void filterInvoked();
 public slots:
     void setFilter(Filter *newFilter);
     void setImage(const QImage *newImage);

@@ -53,6 +53,7 @@ void ApplicationController::buildUI()
     filterWidget.setMenuHeight(menuWidth);
     filterWidget.putButtonGroup(toolsProvider.generateButtonGroup(exampleImage));
     connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
+    connect(&filterWidget, SIGNAL(filterInvoked()), this, SLOT(filterInvoked()));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
@@ -93,6 +94,14 @@ void ApplicationController::colorsButtonClicked()
 void ApplicationController::filterButtonsClicked()
 {
     drawersWidget.setTopWidgetToLeft(&filterWidget);
+}
+
+void ApplicationController::filterInvoked()
+{
+    Filter *filter = toolsProvider.getCurrentFilter();
+    filter->setImage(imageWidget.getImage());
+    filter->process();
+    connect(filter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
 }
 
 int ApplicationController::executeApplication()
