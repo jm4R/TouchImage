@@ -22,11 +22,16 @@ public:
     void putButtonGroup(const QButtonGroup &buttonGroup);
     void setMenuHeight(int newHeight);
 
+protected:
+    virtual void resizeEvent(QResizeEvent *);
 signals:
     void filterInvoked();
 public slots:
     void setFilter(Filter *newFilter);
     void setImage(const QImage *newImage);
+
+private slots:
+    void changeParameterValue();
 
 private:
     void refreshMiniature();

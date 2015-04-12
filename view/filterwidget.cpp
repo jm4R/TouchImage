@@ -15,6 +15,7 @@ FilterWidget::FilterWidget(QWidget *parent) :
     scrollerProperties.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
     scroller->setScrollerProperties(scrollerProperties);
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(filterInvoked()));
+    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(changeParameterValue()));
 }
 
 FilterWidget::~FilterWidget()
@@ -41,9 +42,16 @@ void FilterWidget::setMenuHeight(int newHeight)
     ui->menuScrollArea->setMinimumHeight(newHeight);
 }
 
+void FilterWidget::resizeEvent(QResizeEvent *)
+{
+    refreshMiniature();
+}
+
 void FilterWidget::setFilter(Filter *newFilter)
 {
     filter = newFilter;
+    if (filter)
+        ui->horizontalSlider->setValue(filter->getParameter());
     refreshMiniature();
 }
 
@@ -51,6 +59,14 @@ void FilterWidget::setImage(const QImage *newImage)
 {
     image = newImage;
     refreshMiniature();
+}
+
+void FilterWidget::changeParameterValue()
+{
+    if (filter) {
+        filter->setParameter(ui->horizontalSlider->value());
+        refreshMiniature();
+    }
 }
 
 void FilterWidget::refreshMiniature()

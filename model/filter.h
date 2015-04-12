@@ -23,6 +23,11 @@ public:
 
     QString getName() const;
 
+    int getParameter() const;
+    void setParameter(int value);
+
+    int getDefaultParameter() const;
+
 signals:
     void startProcesses();
     void ready();
@@ -32,6 +37,8 @@ protected:
     virtual void processLine(int lineNumber)=0;
     QString name;
     QImage *image;
+    int parameter;
+    int defaultParameter;
 
 private:
     typedef QSharedPointer<FilterProcess> FilterProcessPointer;

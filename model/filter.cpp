@@ -74,6 +74,21 @@ void Filter::handleProcessReady()
     }
     handleMutex.unlock();
 }
+int Filter::getDefaultParameter() const
+{
+    return defaultParameter;
+}
+
+int Filter::getParameter() const
+{
+    return parameter;
+}
+
+void Filter::setParameter(int value)
+{
+    parameter = value;
+}
+
 QString Filter::getName() const
 {
     return name;

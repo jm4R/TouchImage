@@ -3,6 +3,8 @@
 SepiaFilter::SepiaFilter()
 {
     name = tr("Sepia");
+    defaultParameter = 100;
+    parameter = 100;
 }
 
 SepiaFilter::~SepiaFilter()

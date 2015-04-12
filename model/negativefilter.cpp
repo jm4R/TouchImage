@@ -3,6 +3,8 @@
 NegativeFilter::NegativeFilter()
 {
     name = tr("Negatyw");
+    defaultParameter = 100;
+    parameter = 100;
 }
 
 NegativeFilter::~NegativeFilter()
