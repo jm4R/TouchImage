@@ -9,6 +9,7 @@
 #include "view/rightmenuwidget.h"
 #include "view/screenadapter.h"
 #include "view/filterwidget.h"
+#include "view/brushwidget.h"
 
 #include "toolsprovider.h"
 
@@ -34,6 +35,7 @@ private:
     LeftMenuWidget leftMenuWidget;
     RightMenuWidget rightMenuWidget;
     FilterWidget filterWidget;
+    BrushWidget brushWidget;
 
     //other:
     ScreenAdapter screenAdapter;

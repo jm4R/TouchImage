@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     view/filterwidget.cpp \
     model/sepiafilter.cpp \
     model/negativefilter.cpp \
-    model/saturatefilter.cpp
+    model/saturatefilter.cpp \
+    view/brushwidget.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -45,7 +46,8 @@ HEADERS  += view/mainview.h \
     view/filterwidget.h \
     model/sepiafilter.h \
     model/negativefilter.h \
-    model/saturatefilter.h
+    model/saturatefilter.h \
+    view/brushwidget.h
 
 CONFIG += mobility
 MOBILITY = 
@@ -56,6 +58,7 @@ RESOURCES += \
 FORMS += \
     view/leftmenuwidget.ui \
     view/rightmenuwidget.ui \
-    view/filterwidget.ui
+    view/filterwidget.ui \
+    view/brushwidget.ui
 
 CONFIG += c++11

@@ -78,12 +78,14 @@ void ApplicationController::openFileButtonClicked()
 
 void ApplicationController::brushesButtonClicked()
 {
-    //TODO
+    drawersWidget.setTopWidgetToLeft(&brushWidget);
 }
 
 void ApplicationController::colorsButtonClicked()
 {
-    //TODO
+    //MOCK{
+    drawersWidget.setTopWidgetToLeft(&brushWidget);
+    //}MOCK
 }
 
 void ApplicationController::filterButtonsClicked()

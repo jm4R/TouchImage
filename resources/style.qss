@@ -9,10 +9,10 @@ QMainWindow, DrawersWidget {
 ImageWidget {
     background-color : rgba(120,0,0,0);
 }
-LeftMenuWidget, RightMenuWidget, FilterWidget {
+.LeftMenuWidget, .RightMenuWidget, .FilterWidget, .BrushWidget {
     background-color : rgba(0,0,0,220);
 }
-.FilterWidget {
+.FilterWidget, .BrushWidget {
     border: 2px solid rgb(255,100,0);
 }
 [style="pickFilterButton"] {

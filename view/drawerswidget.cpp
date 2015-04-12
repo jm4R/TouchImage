@@ -173,6 +173,10 @@ QWidget *DrawersWidget::getLeftWidget() const
 
 void DrawersWidget::setLeftWidget(QWidget *value, int widgetWidth)
 {
+    if (leftWidget) {
+        leftWidget->setParent(0);
+        leftWidget->hide();
+    }
     leftWidget = value;
     leftWidgetWidth = widgetWidth;
     updateUI();
@@ -180,6 +184,10 @@ void DrawersWidget::setLeftWidget(QWidget *value, int widgetWidth)
 
 void DrawersWidget::setRightWidget(QWidget *value, int widgetWidth)
 {
+    if (rightWidget) {
+        rightWidget->setParent(0);
+        rightWidget->hide();
+    }
     rightWidget = value;
     rightWidgetWidth = widgetWidth;
     updateUI();
@@ -192,6 +200,10 @@ QWidget *DrawersWidget::getTopWidgetToRight() const
 
 void DrawersWidget::setTopWidgetToRight(QWidget *value)
 {
+    if (topWidgetToRight) {
+        topWidgetToRight->setParent(0);
+        topWidgetToRight->hide();
+    }
     topWidgetToRight = value;
     updateUI();
 }
@@ -203,6 +215,10 @@ QWidget *DrawersWidget::getTopWidgetToLeft() const
 
 void DrawersWidget::setTopWidgetToLeft(QWidget *value)
 {
+    if (topWidgetToLeft) {
+        topWidgetToLeft->setParent(0);
+        topWidgetToLeft->hide();
+    }
     topWidgetToLeft = value;
     updateUI();
 }
@@ -214,6 +230,10 @@ QWidget *DrawersWidget::getBottomWidget() const
 
 void DrawersWidget::setBottomWidget(QWidget *value)
 {
+    if (bottomWidget) {
+        bottomWidget->setParent(0);
+        bottomWidget->hide();
+    }
     bottomWidget = value;
     updateUI();
 }

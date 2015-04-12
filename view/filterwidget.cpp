@@ -15,7 +15,7 @@ FilterWidget::FilterWidget(QWidget *parent) :
     scrollerProperties.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
     scroller->setScrollerProperties(scrollerProperties);
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(filterInvoked()));
-    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(changeParameterValue()));
+    connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(changeParameterValue()));
 }
 
 FilterWidget::~FilterWidget()
