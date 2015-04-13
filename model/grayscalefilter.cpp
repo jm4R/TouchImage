@@ -3,8 +3,8 @@
 GrayscaleFilter::GrayscaleFilter(QObject *parent) : ColorFilter(parent)
 {
     name = tr("Desaturacja");
-    defaultParameter = 100;
-    parameter = 100;
+    defaultParameter = 1000;
+    parameter = 1000;
 }
 
 GrayscaleFilter::~GrayscaleFilter()
@@ -15,6 +15,6 @@ GrayscaleFilter::~GrayscaleFilter()
 uint GrayscaleFilter::processPixel(uint pixel)
 {
     uint v = ( qRed(pixel) + qGreen(pixel) + qBlue(pixel) ) / 3;
-    return qRgb(v,v,v);
+    return mergePixel( pixel, qRgb(v,v,v) );
 }
 

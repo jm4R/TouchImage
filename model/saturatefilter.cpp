@@ -3,8 +3,8 @@
 SaturateFilter::SaturateFilter()
 {
     name = tr("Nasycenie");
-    defaultParameter = 50;
-    parameter = 50;
+    defaultParameter = 500;
+    parameter = 500;
 }
 
 SaturateFilter::~SaturateFilter()
@@ -15,7 +15,9 @@ SaturateFilter::~SaturateFilter()
 uint SaturateFilter::processPixel(uint pixel)
 {
     QColor color(pixel);
-    int newSaturation = color.hsvSaturation()*4;
+
+    int newSaturation = color.hsvSaturation();
+    newSaturation += newSaturation * 4 * parameter / 1000;
     if (newSaturation > 255) {
         newSaturation=255;
     }

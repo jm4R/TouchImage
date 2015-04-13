@@ -14,6 +14,7 @@ public:
 protected:
     virtual void processLine(int lineNumber);
     virtual uint processPixel(uint pixel) = 0;
+    uint mergePixel(uint in, uint out);
 signals:
 
 public slots:

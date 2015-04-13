@@ -14,14 +14,17 @@ void ColorFilter::processLine(int lineNumber)
 {
     QRgb *line = reinterpret_cast<QRgb*>(image->scanLine(lineNumber));
     int width = image->width();
-    float changedFactor = parameter / 100.0f;
-    float preservedFactor = (100 - parameter) / 100.0f;
     for (int i=0; i<width; i++) {
-        uint newValue = processPixel(line[i]);
-        line[i] = qRgb (
-                    qRed(newValue) * changedFactor + qRed(line[i]) * preservedFactor,
-                    qGreen(newValue) * changedFactor + qGreen(line[i]) * preservedFactor,
-                    qBlue(newValue) * changedFactor + qBlue(line[i]) * preservedFactor );
+        line[i] = processPixel(line[i]);
     }
+}
+
+uint ColorFilter::mergePixel(uint in, uint out)
+{
+    return qRgb(
+                ( qRed(out) * parameter + qRed(in) * (1000-parameter) ) / 1000,
+                ( qGreen(out) * parameter + qGreen(in) * (1000-parameter) ) / 1000,
+                ( qBlue(out) * parameter + qBlue(in) * (1000-parameter) ) / 1000
+                );
 }
 
