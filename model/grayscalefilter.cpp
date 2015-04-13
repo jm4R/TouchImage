@@ -14,7 +14,6 @@ GrayscaleFilter::~GrayscaleFilter()
 
 uint GrayscaleFilter::processPixel(uint pixel)
 {
-    uint v = ( qRed(pixel) + qGreen(pixel) + qBlue(pixel) ) / 3;
-    return mergePixel( pixel, qRgb(v,v,v) );
+    return mergePixel( pixel, qGray(pixel) );
 }
 

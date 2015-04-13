@@ -29,7 +29,9 @@ SOURCES += main.cpp\
     model/sepiafilter.cpp \
     model/negativefilter.cpp \
     model/saturatefilter.cpp \
-    view/brushwidget.cpp
+    view/brushwidget.cpp \
+    model/splotfilter.cpp \
+    model/denoisefilter.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -47,7 +49,9 @@ HEADERS  += view/mainview.h \
     model/sepiafilter.h \
     model/negativefilter.h \
     model/saturatefilter.h \
-    view/brushwidget.h
+    view/brushwidget.h \
+    model/splotfilter.h \
+    model/denoisefilter.h
 
 CONFIG += mobility
 MOBILITY = 

@@ -3,6 +3,7 @@
 #include "model/sepiafilter.h"
 #include "model/negativefilter.h"
 #include "model/saturatefilter.h"
+#include "model/denoisefilter.h"
 #include <QVariant>
 
 ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
@@ -14,16 +15,21 @@ ToolsProvider::ToolsProvider(QObject *parent) : QObject(parent),
     _filters->append(new SepiaFilter);
     _filters->append(new NegativeFilter);
     _filters->append(new SaturateFilter);
+    _filters->append(new DenoiseFilter);
+
     _filters->append(0);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
     _filters->append(new NegativeFilter);
     _filters->append(new SaturateFilter);
+    _filters->append(new DenoiseFilter);
+
     _filters->append(0);
     _filters->append(new GrayscaleFilter);
     _filters->append(new SepiaFilter);
     _filters->append(new NegativeFilter);
     _filters->append(new SaturateFilter);
+    _filters->append(new DenoiseFilter);
 
     currentFilter = filters[0];
     *(const_cast<int *> (&filtersCount)) = filters.count();
