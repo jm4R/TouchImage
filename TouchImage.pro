@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     model/saturatefilter.cpp \
     view/brushwidget.cpp \
     model/splotfilter.cpp \
-    model/denoisefilter.cpp
+    model/denoisefilter.cpp \
+    model/historyprovider.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -51,7 +52,8 @@ HEADERS  += view/mainview.h \
     model/saturatefilter.h \
     view/brushwidget.h \
     model/splotfilter.h \
-    model/denoisefilter.h
+    model/denoisefilter.h \
+    model/historyprovider.h
 
 CONFIG += mobility
 MOBILITY = 
