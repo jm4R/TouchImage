@@ -13,8 +13,8 @@
 #include "view/colorwidget.h"
 
 #include "model/historyprovider.h"
-
 #include "toolsprovider.h"
+#include "view/toast.h"
 
 //MOCK{
 #include "model/grayscalefilter.h"
@@ -45,6 +45,7 @@ private:
     ScreenAdapter screenAdapter;
     ToolsProvider toolsProvider;
     HistoryProvider historyProvider;
+    Toast toast;
 
 
     void buildUI();

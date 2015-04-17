@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     model/historyprovider.cpp \
     qt_lgpl_utils/qcolorpicker.cpp \
     qt_lgpl_utils/qcolorluminancepicker.cpp \
-    view/colorwidget.cpp
+    view/colorwidget.cpp \
+    view/toast.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -59,7 +60,8 @@ HEADERS  += view/mainview.h \
     model/historyprovider.h \
     qt_lgpl_utils/qcolorpicker.h \
     qt_lgpl_utils/qcolorluminancepicker.h \
-    view/colorwidget.h
+    view/colorwidget.h \
+    view/toast.h
 
 CONFIG += mobility
 MOBILITY = 

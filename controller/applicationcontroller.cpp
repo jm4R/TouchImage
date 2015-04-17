@@ -7,7 +7,8 @@ ApplicationController::ApplicationController(QApplication &_application, MainVie
       mainView(_mainView),
       drawersWidget(&mainView),
       imageWidget(&mainView),
-      leftMenuWidget(&mainView)
+      leftMenuWidget(&mainView),
+      toast (&_mainView)
 {
     QFile File(":/res/style.qss");
     File.open(QFile::ReadOnly);
@@ -109,6 +110,7 @@ void ApplicationController::filterButtonsClicked()
 
 void ApplicationController::filterInvoked()
 {
+    toast.showToast(tr("filter invoked"));
     Filter *filter = toolsProvider.getCurrentFilter();
     historyProvider.doFilterAndAppend(filter);
 }
