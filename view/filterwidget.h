@@ -28,7 +28,7 @@ signals:
     void filterInvoked();
 public slots:
     void setFilter(Filter *newFilter);
-    void setImage(const QImage *newImage);
+    void setImage(QImage *newImage);
 
 private slots:
     void changeParameterValue();

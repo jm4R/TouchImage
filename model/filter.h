@@ -19,7 +19,7 @@ public:
     void setImage(QImage *value);
 
     void process();
-    void wait();
+    void wait() const;
 
     QString getName() const;
 
@@ -45,7 +45,7 @@ private:
     static QList<FilterProcessPointer> filterProcessPool;
     static int threadCount;
     int threadRuns;
-    QMutex processMutex;
+    static QMutex processMutex;
     QMutex handleMutex;
 };
 

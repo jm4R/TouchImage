@@ -5,10 +5,10 @@
 ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent),
     position(0),
+    currentImage(0),
     horizontalOffset(0),
     verticalOffset(0),
     scaleFactor(1)
-
 {
     grabGesture(Qt::PanGesture);
     grabGesture(Qt::PinchGesture);
@@ -23,10 +23,13 @@ bool ImageWidget::event(QEvent *event)
 
 void ImageWidget::paintEvent(QPaintEvent *event)
 {
+    if (!currentImage) {
+        return;
+    }
     QPainter p(this);
 
-    const qreal iw = currentImage.width();
-    const qreal ih = currentImage.height();
+    const qreal iw = currentImage->width();
+    const qreal ih = currentImage->height();
     const qreal wh = height();
     const qreal ww = width();
 
@@ -34,7 +37,7 @@ void ImageWidget::paintEvent(QPaintEvent *event)
     p.translate(horizontalOffset, verticalOffset);
     p.scale(scaleFactor, scaleFactor);
     p.translate(-iw/2, -ih/2);
-    p.drawImage(0, 0, currentImage);
+    p.drawImage(0, 0, *currentImage);
 
     event->accept();
 }
@@ -89,23 +92,8 @@ void ImageWidget::resizeEvent(QResizeEvent *event)
     event->accept();
 }
 
-bool ImageWidget::loadImage(const QString &fileName)
+void ImageWidget::setImage(QImage *image)
 {
-    QImageReader reader(fileName);
-    if (!reader.canRead()) {
-        return false;
-    }
-
-    QImage image;
-    if (!reader.read(&image)) {
-        return false;
-    }
     currentImage = image;
     update();
-    return true;
-}
-
-QImage *ImageWidget::getImage()
-{
-    return &currentImage;
 }

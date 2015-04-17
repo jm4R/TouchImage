@@ -55,7 +55,7 @@ void FilterWidget::setFilter(Filter *newFilter)
     refreshMiniature();
 }
 
-void FilterWidget::setImage(const QImage *newImage)
+void FilterWidget::setImage(QImage *newImage)
 {
     image = newImage;
     refreshMiniature();

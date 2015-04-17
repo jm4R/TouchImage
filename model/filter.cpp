@@ -4,6 +4,7 @@
 //static begin
 QList<Filter::FilterProcessPointer> Filter::filterProcessPool;
 int Filter::threadCount;
+QMutex Filter::processMutex;
 //static end
 
 Filter::Filter(QObject *parent) :
@@ -33,7 +34,9 @@ QImage *Filter::getImage() const
 
 void Filter::setImage(QImage *value)
 {
+    processMutex.lock();    //change image during process not allowed, wait
     image = value;
+    processMutex.unlock();
 }
 
 void Filter::process()
@@ -50,7 +53,7 @@ void Filter::process()
     emit startProcesses();
 }
 
-void Filter::wait()
+void Filter::wait() const
 {
     for (int i=0; i<threadCount; i++) {
         FilterProcessPointer filterProcess = filterProcessPool[i];
@@ -86,7 +89,9 @@ int Filter::getParameter() const
 
 void Filter::setParameter(int value)
 {
+    processMutex.lock();    //change parameter during process not allowed, wait
     parameter = value;
+    processMutex.unlock();
 }
 
 QString Filter::getName() const

@@ -18,8 +18,9 @@ class ImageWidget : public QWidget
 
 public:
     ImageWidget(QWidget *parent = 0);
-    bool loadImage(const QString &fileName);
-    QImage *getImage();
+
+public slots:
+    void setImage(QImage *image);
 
 protected:
     bool event(QEvent *event);
@@ -39,7 +40,7 @@ private:
     QStringList files;
     int position;
 
-    QImage currentImage;
+    QImage *currentImage;
 
     qreal horizontalOffset;
     qreal verticalOffset;

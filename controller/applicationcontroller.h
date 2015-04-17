@@ -11,6 +11,8 @@
 #include "view/filterwidget.h"
 #include "view/brushwidget.h"
 
+#include "model/historyprovider.h"
+
 #include "toolsprovider.h"
 
 //MOCK{
@@ -40,6 +42,7 @@ private:
     //other:
     ScreenAdapter screenAdapter;
     ToolsProvider toolsProvider;
+    HistoryProvider historyProvider;
 
 
     void buildUI();

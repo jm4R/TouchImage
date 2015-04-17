@@ -54,6 +54,9 @@ void ApplicationController::buildUI()
     connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
     connect(&filterWidget, SIGNAL(filterInvoked()), this, SLOT(filterInvoked()));
 
+    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &imageWidget, SLOT(setImage(QImage*)));
+    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &filterWidget, SLOT(setImage(QImage*)));
+
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
     //}MOCK
@@ -72,8 +75,17 @@ void ApplicationController::openFileButtonClicked()
     const QString fileName =
         QFileDialog::getOpenFileName(&mainView, "Select image folder",
                                           picturesLocations.isEmpty() ? QString() : picturesLocations.front(), "Obrazy (*.png *.xpm *.jpg *.jpeg *.bmp);; Wszystkie pliki (*)");
-    imageWidget.loadImage(fileName);
-    filterWidget.setImage(imageWidget.getImage());
+
+    QImageReader reader(fileName);
+    if (!reader.canRead()) {
+        return; //TODO error
+    }
+
+    QImage *newImage = new QImage();
+    if (!reader.read(newImage)) {
+        return; //TODO error
+    }
+    historyProvider.resetToImage(newImage);
 }
 
 void ApplicationController::brushesButtonClicked()
@@ -96,12 +108,7 @@ void ApplicationController::filterButtonsClicked()
 void ApplicationController::filterInvoked()
 {
     Filter *filter = toolsProvider.getCurrentFilter();
-    if (!filter) {
-        return;
-    }
-    filter->setImage(imageWidget.getImage());
-    filter->process();
-    connect(filter, SIGNAL(ready()), &imageWidget, SLOT(repaint()) );
+    historyProvider.doFilterAndAppend(filter);
 }
 
 int ApplicationController::executeApplication()

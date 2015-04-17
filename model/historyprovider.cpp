@@ -24,7 +24,11 @@ void HistoryProvider::resetToImage(QImage *newImage)
 void HistoryProvider::doFilterAndAppend(Filter *filter)
 {
     if (runningFilter == 0) {
-        QImage *newImage = new QImage(**currentIterator);
+        QImage *newImage = new QImage((*currentIterator)->copy());
+        if (newImage->format() == QImage::Format_Invalid) {
+            delete newImage;
+            return; //TODO: - nie ma pamieci
+        }
         filter->setImage(newImage);
         connect(filter, SIGNAL(ready()), this, SLOT(filterFinished()));
         runningFilter = filter;
