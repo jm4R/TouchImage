@@ -56,6 +56,10 @@ void ApplicationController::buildUI()
 
     connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &imageWidget, SLOT(setImage(QImage*)));
     connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &filterWidget, SLOT(setImage(QImage*)));
+    connect(&historyProvider, SIGNAL(undoStatusChanged(bool)), rightMenuWidget.ui->undoButton, SLOT(setEnabled(bool)));
+    connect(&historyProvider, SIGNAL(redoStatusChanged(bool)), rightMenuWidget.ui->redoButton, SLOT(setEnabled(bool)));
+    connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
+    connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &historyProvider, SLOT(redo()));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
