@@ -99,9 +99,7 @@ void ApplicationController::brushesButtonClicked()
 
 void ApplicationController::colorsButtonClicked()
 {
-    //MOCK{
-    drawersWidget.setTopWidgetToLeft(&brushWidget);
-    //}MOCK
+    drawersWidget.setTopWidgetToLeft(&colorWidget);
 }
 
 void ApplicationController::filterButtonsClicked()

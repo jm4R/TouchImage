@@ -10,6 +10,7 @@
 #include "view/screenadapter.h"
 #include "view/filterwidget.h"
 #include "view/brushwidget.h"
+#include "view/colorwidget.h"
 
 #include "model/historyprovider.h"
 
@@ -38,6 +39,7 @@ private:
     RightMenuWidget rightMenuWidget;
     FilterWidget filterWidget;
     BrushWidget brushWidget;
+    ColorWidget colorWidget;
 
     //other:
     ScreenAdapter screenAdapter;

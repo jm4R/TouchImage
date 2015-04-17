@@ -19,4 +19,5 @@ private:
     Ui::BrushWidget *ui;
 };
 
+
 #endif // BRUSHWIDGET_H

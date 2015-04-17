@@ -44,3 +44,7 @@ QPushButton {
 QPushButton:pressed {
     background : rgb(128,128,128);
 }
+
+#colorFrame {
+    background : none;
+}

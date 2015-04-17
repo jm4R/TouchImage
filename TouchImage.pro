@@ -32,7 +32,10 @@ SOURCES += main.cpp\
     view/brushwidget.cpp \
     model/splotfilter.cpp \
     model/denoisefilter.cpp \
-    model/historyprovider.cpp
+    model/historyprovider.cpp \
+    qt_lgpl_utils/qcolorpicker.cpp \
+    qt_lgpl_utils/qcolorluminancepicker.cpp \
+    view/colorwidget.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -53,7 +56,10 @@ HEADERS  += view/mainview.h \
     view/brushwidget.h \
     model/splotfilter.h \
     model/denoisefilter.h \
-    model/historyprovider.h
+    model/historyprovider.h \
+    qt_lgpl_utils/qcolorpicker.h \
+    qt_lgpl_utils/qcolorluminancepicker.h \
+    view/colorwidget.h
 
 CONFIG += mobility
 MOBILITY = 
@@ -65,6 +71,7 @@ FORMS += \
     view/leftmenuwidget.ui \
     view/rightmenuwidget.ui \
     view/filterwidget.ui \
-    view/brushwidget.ui
+    view/brushwidget.ui \
+    view/colorwidget.ui
 
 CONFIG += c++11
