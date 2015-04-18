@@ -5,19 +5,13 @@
 #include <QImage>
 #include <QtWidgets>
 
-/*QT_BEGIN_NAMESPACE
-class QGestureEvent;
-class QPanGesture;
-class QPinchGesture;
-class QSwipeGesture;
-QT_END_NAMESPACE*/
-
 class ImageWidget : public QWidget
 {
     Q_OBJECT
 
 public:
     ImageWidget(QWidget *parent = 0);
+    ~ImageWidget();
 
 public slots:
     void setImage(QImage *image);
@@ -27,17 +21,18 @@ protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 private:
     bool gestureEvent(QGestureEvent *event);
     void panTriggered(QPanGesture*);
     void pinchTriggered(QPinchGesture*);
-    void swipeTriggered(QSwipeGesture*);
-
     void updateImage();
+    QMatrix calculateMatrix();
 
-    QString path;
-    QStringList files;
+
     int position;
 
     QImage *currentImage;
@@ -46,8 +41,12 @@ private:
     qreal verticalOffset;
     qreal scaleFactor;
 
+    QPainterPath *path;
+    QPoint startPoint;
+
 signals:
     void gestureFinished();
+    void pathDrawn(QPolygonF polygon, QPointF startPoint);
 };
 
 #endif

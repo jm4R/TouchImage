@@ -64,6 +64,9 @@ void ApplicationController::buildUI()
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
+    connect(&imageWidget, SIGNAL(pathDrawn(QPolygonF,QPointF)), &brush, SLOT(process(QPolygonF,QPointF)));
+    connect(&imageWidget, SIGNAL(pathDrawn(QPolygonF,QPointF)), &brush, SLOT(process(QPolygonF,QPointF)));
+    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &brush, SLOT(setImage(QImage*)));
     //}MOCK
 }
 

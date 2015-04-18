@@ -18,6 +18,7 @@
 
 //MOCK{
 #include "model/grayscalefilter.h"
+#include "model/brush.h"
 //}MOCK
 
 
@@ -46,6 +47,10 @@ private:
     ToolsProvider toolsProvider;
     HistoryProvider historyProvider;
     Toast toast;
+
+    //MOCK{
+    Brush brush;
+    //}MOCK
 
 
     void buildUI();

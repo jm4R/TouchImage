@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     qt_lgpl_utils/qcolorpicker.cpp \
     qt_lgpl_utils/qcolorluminancepicker.cpp \
     view/colorwidget.cpp \
-    view/toast.cpp
+    view/toast.cpp \
+    model/brush.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -61,7 +62,8 @@ HEADERS  += view/mainview.h \
     qt_lgpl_utils/qcolorpicker.h \
     qt_lgpl_utils/qcolorluminancepicker.h \
     view/colorwidget.h \
-    view/toast.h
+    view/toast.h \
+    model/brush.h
 
 CONFIG += mobility
 MOBILITY = 
