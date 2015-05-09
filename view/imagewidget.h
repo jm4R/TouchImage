@@ -46,7 +46,8 @@ private:
 
 signals:
     void gestureFinished();
-    void pathDrawn(QPolygonF polygon, QPointF startPoint);
+    void pathDrawn(QPainterPath polygon);
+    void matrixChanged(QMatrix matrix);
 };
 
 #endif

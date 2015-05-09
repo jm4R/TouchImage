@@ -14,14 +14,16 @@ public:
 
     QImage *getImage() const;
     QString getName() const;
+    static void setTransformationMatrix(QMatrix matrix);
 
 public slots:
-    void process(QPolygonF polygon, QPointF start);
+    void process(QPainterPath path);
     void setImage(QImage *value);
 
 protected:
     QString name;
     QImage *image;
+    static QMatrix transformationMatrix;
 };
 
 #endif // BRUSH_H

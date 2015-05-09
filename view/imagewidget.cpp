@@ -75,11 +75,8 @@ void ImageWidget::mouseReleaseEvent(QMouseEvent *event)
     if (path) {
         path->lineTo(event->pos());
         update();
-        QMatrix invertedMatrix = calculateMatrix().inverted();
-        QPolygonF &&polygon = path->toFillPolygon(invertedMatrix);
-        QPointF startPointT = invertedMatrix.map(startPoint);
+        emit pathDrawn(*path);
         delete path; path = 0;
-        emit pathDrawn(qMove(polygon), startPointT);
     }
 }
 
@@ -131,6 +128,7 @@ QMatrix ImageWidget::calculateMatrix()
     m.translate(horizontalOffset, verticalOffset);
     m.scale(scaleFactor, scaleFactor);
     m.translate(-iw/2, -ih/2);
+    emit matrixChanged(qMove(m));
     return qMove(m);
 }
 
