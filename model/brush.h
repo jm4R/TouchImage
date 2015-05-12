@@ -14,7 +14,6 @@ public:
 
     QImage *getImage() const;
     QString getName() const;
-    static void setTransformationMatrix(QMatrix matrix);
 
 public slots:
     void process(QPainterPath path);
@@ -23,7 +22,6 @@ public slots:
 protected:
     QString name;
     QImage *image;
-    static QMatrix transformationMatrix;
 };
 
 #endif // BRUSH_H

@@ -1,6 +1,7 @@
 #include "applicationcontroller.h"
 #include "ui_leftmenuwidget.h"
 #include "ui_rightmenuwidget.h"
+#include "model/settings.h"
 
 ApplicationController::ApplicationController(QApplication &_application, MainView &_mainView) :
       application(_application),
@@ -62,6 +63,9 @@ void ApplicationController::buildUI()
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &historyProvider, SLOT(redo()));
 
+    connect(&colorWidget, SIGNAL(colorChanged(QColor)), &Settings::instance(), SLOT(setColor(QColor)));
+    connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
+
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
     connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), &brush, SLOT(process(QPainterPath)));
@@ -115,11 +119,6 @@ void ApplicationController::filterInvoked()
     toast.showToast(tr("filter invoked"));
     Filter *filter = toolsProvider.getCurrentFilter();
     historyProvider.doFilterAndAppend(filter);
-}
-
-void ApplicationController::transformationMatrixChanged(QMatrix matrix)
-{
-    Brush::setTransformationMatrix(matrix.inverted());
 }
 
 int ApplicationController::executeApplication()

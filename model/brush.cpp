@@ -1,6 +1,5 @@
 #include "brush.h"
-
-QMatrix Brush::transformationMatrix;
+#include "settings.h"
 
 Brush::Brush(QObject *parent) : QObject(parent)
 {
@@ -25,14 +24,14 @@ void Brush::setImage(QImage *value)
 void Brush::process(QPainterPath path)
 {
     //MOCK{
+    Settings &s = Settings::instance();
     QPainter painter(image);
-    painter.setMatrix(transformationMatrix);
+    painter.setMatrix(s.getTransformationMatrix());
     QPen pen;
     QBrush brush;
-    brush.setColor(QColor(255,0,0));
     pen.setBrush(brush);
-    pen.setColor(QColor(0,255,0));
-    pen.setWidth(15);
+    pen.setColor(s.getColor());
+    pen.setWidth(s.getBrushWidth());
     painter.setPen(pen);
     painter.drawPath(path);
     //}MOCK
@@ -42,9 +41,3 @@ QString Brush::getName() const
 {
     return name;
 }
-
-void Brush::setTransformationMatrix(QMatrix matrix)
-{
-    transformationMatrix = matrix;
-}
-

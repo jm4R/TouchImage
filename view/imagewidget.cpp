@@ -128,7 +128,7 @@ QMatrix ImageWidget::calculateMatrix()
     m.translate(horizontalOffset, verticalOffset);
     m.scale(scaleFactor, scaleFactor);
     m.translate(-iw/2, -ih/2);
-    emit matrixChanged(qMove(m));
+    emit matrixChanged(qMove(m.inverted()));
     return qMove(m);
 }
 

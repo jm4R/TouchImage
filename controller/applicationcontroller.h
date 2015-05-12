@@ -64,7 +64,6 @@ public slots:
     void colorsButtonClicked();
     void filterButtonsClicked();
     void filterInvoked();
-    void transformationMatrixChanged(QMatrix matrix);
 };
 
 #endif // APPLICATIONaa_H
