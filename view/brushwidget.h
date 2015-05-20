@@ -2,6 +2,7 @@
 #define BRUSHWIDGET_H
 
 #include <QFrame>
+#include <QResizeEvent>
 
 namespace Ui {
 class BrushWidget;
@@ -15,8 +16,14 @@ public:
     explicit BrushWidget(QWidget *parent = 0);
     ~BrushWidget();
 
+protected:
+    virtual void resizeEvent(QResizeEvent *event);
+
 private:
     Ui::BrushWidget *ui;
+
+private slots:
+    void updatePreview();
 };
 
 
