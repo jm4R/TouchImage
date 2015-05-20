@@ -81,3 +81,6 @@ FORMS += \
     view/colorwidget.ui
 
 CONFIG += c++11
+
+DISTFILES += \
+    resources/TODO.txt
