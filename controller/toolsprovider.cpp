@@ -82,3 +82,11 @@ Filter *ToolsProvider::getCurrentFilter() const
     return currentFilter;
 }
 
+Brush *ToolsProvider::getCurrentBrush() const
+{
+    //{MOCK
+    static Brush brush;
+    return &brush;
+    //}MOCK
+}
+

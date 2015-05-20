@@ -68,8 +68,7 @@ void ApplicationController::buildUI()
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
-    connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), &brush, SLOT(process(QPainterPath)));
-    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &brush, SLOT(setImage(QImage*)));
+    connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), this, SLOT(brushInvoked(QPainterPath)));
     //}MOCK
 }
 
@@ -119,6 +118,12 @@ void ApplicationController::filterInvoked()
     toast.showToast(tr("filter invoked"));
     Filter *filter = toolsProvider.getCurrentFilter();
     historyProvider.doFilterAndAppend(filter);
+}
+
+void ApplicationController::brushInvoked(QPainterPath path)
+{
+    Brush *brush = toolsProvider.getCurrentBrush();
+    historyProvider.doBrushAndAppend(brush, path);
 }
 
 int ApplicationController::executeApplication()

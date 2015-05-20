@@ -38,6 +38,28 @@ void HistoryProvider::doFilterAndAppend(Filter *filter)
     }
 }
 
+void HistoryProvider::doBrushAndAppend(Brush *brush, QPainterPath path)
+{
+    QImage *newImage = new QImage((*currentIterator)->copy());
+    if (newImage->format() == QImage::Format_Invalid) {
+        delete newImage;
+        return; //TODO: - nie ma pamieci
+    }
+    brush->setImage(newImage);
+    brush->process(path);
+
+    Iterator itDelete = currentIterator+1;
+    while (itDelete != list.end()) {
+        delete *itDelete;
+        itDelete = list.erase(itDelete);
+    }
+    list.append(newImage);
+    currentIterator = list.end() - 1;
+    emit currentImageChanged(*currentIterator);
+    emit undoStatusChanged(true);
+    emit redoStatusChanged(false);
+}
+
 void HistoryProvider::undo()
 {
     currentIterator--;

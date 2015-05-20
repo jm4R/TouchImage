@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QList>
 #include "filter.h"
+#include "brush.h"
 
 class HistoryProvider : public QObject
 {
@@ -18,6 +19,7 @@ signals:
     void redoStatusChanged(bool enabled);
 public slots:
     void doFilterAndAppend(Filter *filter);
+    void doBrushAndAppend(Brush *brush, QPainterPath path);
     void undo();
     void redo();
 private slots:

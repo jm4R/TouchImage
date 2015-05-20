@@ -6,6 +6,7 @@
 #include <QButtonGroup>
 #include <QToolButton>
 #include "model/filter.h"
+#include "model/brush.h"
 #include "model/grayscalefilter.h"
 
 class ToolsProvider : public QObject
@@ -19,6 +20,7 @@ public:
     QButtonGroup &generateButtonGroup(const QImage &iconImage);
 
     Filter *getCurrentFilter() const;
+    Brush *getCurrentBrush() const;
 
 signals:
     void currentFilterChanged(Filter *filter);
