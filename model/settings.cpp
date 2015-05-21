@@ -1,9 +1,6 @@
 #include "settings.h"
 
-Settings::Settings() :
-  color(0,255,0),
-  brushWidth(10)
-
+Settings::Settings()
 {
 
 }
@@ -19,33 +16,31 @@ Settings::~Settings()
 
 }
 
-QColor Settings::getColor() const
-{
-    return color;
-}
-
 QMatrix Settings::getTransformationMatrix() const
 {
     return transformationMatrix;
-}
-
-int Settings::getBrushWidth() const
-{
-    return brushWidth;
-}
-
-void Settings::setColor(QColor value)
-{
-    color = value;
 }
 
 void Settings::setTransformationMatrix(QMatrix value)
 {
     transformationMatrix = value;
 }
-
-void Settings::setBrushWidth(int value)
+bool Settings::getAnialiasing() const
 {
-    brushWidth = value;
+    return anialiasing;
 }
 
+void Settings::setAnialiasing(bool value)
+{
+    anialiasing = value;
+}
+
+QPen Settings::getPen() const
+{
+    return pen;
+}
+
+void Settings::setPen(QPen value)
+{
+    pen = value;
+}

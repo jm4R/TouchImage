@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QResizeEvent>
+#include <QPen>
 
 namespace Ui {
 class BrushWidget;
@@ -16,14 +17,24 @@ public:
     explicit BrushWidget(QWidget *parent = 0);
     ~BrushWidget();
 
+public slots:
+    void setColor(QColor color);
+
 protected:
     virtual void resizeEvent(QResizeEvent *event);
 
 private:
+    QPen generatePen();
+    void drawPreview(QPen pen, bool antialiasing);
     Ui::BrushWidget *ui;
+    QColor color;
 
 private slots:
-    void updatePreview();
+    void updatePen();
+
+signals:
+    void penChanged(QPen pen);
+    void antialiasingChanged(bool antialiasing);
 };
 
 

@@ -23,18 +23,12 @@ void Brush::setImage(QImage *value)
 
 void Brush::process(QPainterPath path)
 {
-    //MOCK{
     Settings &s = Settings::instance();
     QPainter painter(image);
     painter.setMatrix(s.getTransformationMatrix());
-    QPen pen;
-    QBrush brush;
-    pen.setBrush(brush);
-    pen.setColor(s.getColor());
-    pen.setWidth(s.getBrushWidth());
-    painter.setPen(pen);
+    painter.setRenderHint(QPainter::Antialiasing, s.getAnialiasing());
+    painter.setPen(s.getPen());
     painter.drawPath(path);
-    //}MOCK
 }
 
 QString Brush::getName() const

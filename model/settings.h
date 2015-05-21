@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QMatrix>
 #include <QColor>
+#include <QPen>
 
 class Settings : public QObject
 {
@@ -12,19 +13,19 @@ public:
     static Settings& instance();
     ~Settings();
 
-    QColor getColor() const;
     QMatrix getTransformationMatrix() const;
-    int getBrushWidth() const;
+    QPen getPen() const;
+    bool getAnialiasing() const;
 
 public slots:
-    void setColor(QColor value);
     void setTransformationMatrix(QMatrix value);
-    void setBrushWidth(int value);
+    void setPen(QPen value);
+    void setAnialiasing(bool value);
 
 private:
-    QColor color;
     QMatrix transformationMatrix;
-    int brushWidth;
+    QPen pen;
+    bool anialiasing;
 
     Settings();
     Settings(Settings const&) = delete;

@@ -7,11 +7,11 @@ BrushWidget::BrushWidget(QWidget *parent) :
     ui(new Ui::BrushWidget)
 {
     ui->setupUi(this);
-    connect(ui->antialiasingCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
-    connect(ui->cosmeticCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
-    connect(ui->opacitySlider, SIGNAL(sliderReleased()), this, SLOT(updatePreview()));
-    connect(ui->roundCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
-    connect(ui->widthSlider, SIGNAL(sliderReleased()), this, SLOT(updatePreview()));
+    connect(ui->antialiasingCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePen()));
+    connect(ui->cosmeticCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePen()));
+    connect(ui->opacitySlider, SIGNAL(sliderReleased()), this, SLOT(updatePen()));
+    connect(ui->roundCheckBox, SIGNAL(toggled(bool)), this, SLOT(updatePen()));
+    connect(ui->widthSlider, SIGNAL(sliderReleased()), this, SLOT(updatePen()));
 }
 
 BrushWidget::~BrushWidget()
@@ -19,13 +19,37 @@ BrushWidget::~BrushWidget()
     delete ui;
 }
 
+void BrushWidget::setColor(QColor color)
+{
+    this->color = color;
+    updatePen();
+}
+
 void BrushWidget::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
-    updatePreview();
+    updatePen();
 }
 
-void BrushWidget::updatePreview()
+QPen BrushWidget::generatePen()
+{
+    QPen pen;
+    pen.setWidth(ui->widthSlider->value());
+    if (ui->roundCheckBox->isChecked()) {
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
+    } else {
+        pen.setCapStyle(Qt::SquareCap);
+        pen.setJoinStyle(Qt::MiterJoin);
+    }
+    pen.setCosmetic(ui->cosmeticCheckBox->isChecked());
+    color.setAlpha(ui->opacitySlider->value());
+    pen.setColor(color);
+
+    return qMove(pen);
+}
+
+void BrushWidget::drawPreview(QPen pen, bool antialiasing)
 {
     QSize size = ui->previewLabel->size();
     QPixmap previewPixmap(size);
@@ -46,21 +70,20 @@ void BrushWidget::updatePreview()
     path.lineTo(QPointF(size.width()*0.7, size.height()*0.6));
     path.lineTo(QPointF(size.width()*0.8, size.height()*0.8));
 
-    QPen pen;
-    pen.setWidth(ui->widthSlider->value());
-    if (ui->roundCheckBox->isChecked()) {
-        pen.setCapStyle(Qt::RoundCap);
-        pen.setJoinStyle(Qt::RoundJoin);
-    } else {
-        pen.setCapStyle(Qt::SquareCap);
-        pen.setJoinStyle(Qt::MiterJoin);
-    }
-    pen.setCosmetic(ui->cosmeticCheckBox->isChecked());
-    pen.setColor(QColor(0,255,0,ui->opacitySlider->value()));
     painter.setPen(pen);
-    painter.setRenderHint(painter.Antialiasing, ui->antialiasingCheckBox->isChecked());
+    painter.setRenderHint(painter.Antialiasing, antialiasing);
 
     painter.drawPath(path);
-
     ui->previewLabel->setPixmap(previewPixmap);
+}
+
+void BrushWidget::updatePen()
+{
+    QPen pen = generatePen();
+    bool antialiasing = ui->antialiasingCheckBox->isChecked();
+
+    drawPreview(pen, antialiasing);
+
+    emit penChanged(pen);
+    emit antialiasingChanged(antialiasing);
 }

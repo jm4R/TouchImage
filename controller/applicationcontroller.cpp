@@ -40,6 +40,7 @@ void ApplicationController::buildUI()
     loadIcon(rightMenuWidget.ui->redoButton, "redo.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->saveButton, "saveFile.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->undoButton, "undo.svg", 1.0f);
+    connect(rightMenuWidget.ui->openButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
@@ -63,7 +64,10 @@ void ApplicationController::buildUI()
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &historyProvider, SLOT(redo()));
 
-    connect(&colorWidget, SIGNAL(colorChanged(QColor)), &Settings::instance(), SLOT(setColor(QColor)));
+    //connect(&colorWidget, SIGNAL(colorChanged(QColor)), &Settings::instance(), SLOT(setColor(QColor)));
+    connect(&colorWidget, SIGNAL(colorChanged(QColor)), &brushWidget, SLOT(setColor(QColor)));
+    connect(&brushWidget, SIGNAL(penChanged(QPen)), &Settings::instance(), SLOT(setPen(QPen)));
+    connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAnialiasing(bool)));
     connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
 
     //MOCK{
