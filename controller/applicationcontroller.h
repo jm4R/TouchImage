@@ -17,6 +17,7 @@
 #include "view/toast.h"
 
 //MOCK{
+#include "model/androidfiledialog.h"
 #include "model/grayscalefilter.h"
 #include "model/brush.h"
 //}MOCK
@@ -47,6 +48,7 @@ private:
     ToolsProvider toolsProvider;
     HistoryProvider historyProvider;
     Toast toast;
+    AndroidFileDialog fileDialog;
 
     //MOCK{
     Brush brush;
@@ -59,6 +61,10 @@ private:
 public slots:
     //TODO temp
     void openFileButtonClicked();
+
+    //{MOCK
+    void openFileNameReady(QString fileName);
+    //}MOCK
 
     void brushesButtonClicked();
     void colorsButtonClicked();

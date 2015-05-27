@@ -2,7 +2,7 @@
 
 HistoryProvider::HistoryProvider(QObject *parent) : QObject(parent), runningFilter(0)
 {
-
+    currentIterator = list.end();
 }
 
 HistoryProvider::~HistoryProvider()
@@ -40,6 +40,9 @@ void HistoryProvider::doFilterAndAppend(Filter *filter)
 
 void HistoryProvider::doBrushAndAppend(Brush *brush, QPainterPath path)
 {
+    if (currentIterator == list.end()) {
+        return;
+    }
     QImage *newImage = new QImage((*currentIterator)->copy());
     if (newImage->format() == QImage::Format_Invalid) {
         delete newImage;

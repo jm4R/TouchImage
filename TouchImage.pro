@@ -6,6 +6,10 @@
 
 QT       += core gui svg
 
+android {
+    QT += androidextras
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = TouchImage
@@ -38,7 +42,8 @@ SOURCES += main.cpp\
     view/colorwidget.cpp \
     view/toast.cpp \
     model/brush.cpp \
-    model/settings.cpp
+    model/settings.cpp \
+    model/androidfiledialog.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -65,7 +70,8 @@ HEADERS  += view/mainview.h \
     view/colorwidget.h \
     view/toast.h \
     model/brush.h \
-    model/settings.h
+    model/settings.h \
+    model/androidfiledialog.h
 
 CONFIG += mobility
 MOBILITY = 

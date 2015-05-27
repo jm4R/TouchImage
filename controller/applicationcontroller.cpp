@@ -64,11 +64,12 @@ void ApplicationController::buildUI()
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &historyProvider, SLOT(redo()));
 
-    //connect(&colorWidget, SIGNAL(colorChanged(QColor)), &Settings::instance(), SLOT(setColor(QColor)));
     connect(&colorWidget, SIGNAL(colorChanged(QColor)), &brushWidget, SLOT(setColor(QColor)));
     connect(&brushWidget, SIGNAL(penChanged(QPen)), &Settings::instance(), SLOT(setPen(QPen)));
     connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAnialiasing(bool)));
     connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
+
+    connect(&fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
@@ -85,10 +86,14 @@ void ApplicationController::loadIcon(QToolButton *button, QString resourceName, 
 
 void ApplicationController::openFileButtonClicked()
 {
-    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
-    const QString fileName =
-        QFileDialog::getOpenFileName(&mainView, "Select image folder",
-                                          picturesLocations.isEmpty() ? QString() : picturesLocations.front(), "Obrazy (*.png *.xpm *.jpg *.jpeg *.bmp);; Wszystkie pliki (*)");
+    bool success = fileDialog.provideExistingFileName();
+    if (!success) {
+        //TODO error
+    }
+}
+
+void ApplicationController::openFileNameReady(QString fileName)
+{
 
     QImageReader reader(fileName);
     if (!reader.canRead()) {
