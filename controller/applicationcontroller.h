@@ -76,6 +76,7 @@ public slots:
     void filterButtonsClicked();
     void filterInvoked();
     void brushInvoked(QPainterPath path);
+    void operationFinished(int time);
 };
 
 #endif // APPLICATIONaa_H

@@ -78,6 +78,7 @@ void ApplicationController::buildUI()
 
     connect(fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
 
+    connect(&historyProvider, SIGNAL(operationFinished(int)), this, SLOT(operationFinished(int)));
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
     connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), this, SLOT(brushInvoked(QPainterPath)));
@@ -131,7 +132,6 @@ void ApplicationController::filterButtonsClicked()
 
 void ApplicationController::filterInvoked()
 {
-    toast.showToast(tr("filter invoked"));
     Filter *filter = toolsProvider.getCurrentFilter();
     historyProvider.doFilterAndAppend(filter);
 }
@@ -140,6 +140,11 @@ void ApplicationController::brushInvoked(QPainterPath path)
 {
     Brush *brush = toolsProvider.getCurrentBrush();
     historyProvider.doBrushAndAppend(brush, path);
+}
+
+void ApplicationController::operationFinished(int time)
+{
+    toast.showToast(QString::number(time) + "ms");
 }
 
 int ApplicationController::executeApplication()

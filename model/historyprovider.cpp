@@ -32,6 +32,7 @@ void HistoryProvider::doFilterAndAppend(Filter *filter)
         filter->setImage(newImage);
         connect(filter, SIGNAL(ready()), this, SLOT(filterFinished()));
         runningFilter = filter;
+        timer.start();
         filter->process();
     } else {
         //TODO: info - 2 filters at time not allowed
@@ -81,6 +82,8 @@ void HistoryProvider::redo()
 
 void HistoryProvider::filterFinished()
 {
+    int elapsed = timer.elapsed();
+    timer.invalidate();
     disconnect(runningFilter, SIGNAL(ready()), this, SLOT(filterFinished()));
     Iterator itDelete = currentIterator+1;
     while (itDelete != list.end()) {
@@ -92,6 +95,7 @@ void HistoryProvider::filterFinished()
     emit currentImageChanged(*currentIterator);
     emit undoStatusChanged(true);
     emit redoStatusChanged(false);
+    emit operationFinished(elapsed);
     runningFilter = 0;
 }
 

@@ -21,6 +21,11 @@ void ColorFilter::processLine(int lineNumber)
 
 uint ColorFilter::mergePixel(uint in, uint out)
 {
+    if (parameter == 1000) {
+        return out;
+    } else if (parameter == 0) {
+        return in;
+    }
     return qRgb(
                 ( qRed(out) * parameter + qRed(in) * (1000-parameter) ) / 1000,
                 ( qGreen(out) * parameter + qGreen(in) * (1000-parameter) ) / 1000,

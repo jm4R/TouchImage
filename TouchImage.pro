@@ -6,15 +6,16 @@
 
 QT       += core gui svg
 
-    android {
-        QT += androidextras
-        SOURCES += model/androidfiledialog.cpp
-        HEADERS += model/androidfiledialog.h
-    }
-    !android {
-        SOURCES += model/qtfiledialog.cpp
-        HEADERS += model/qtfiledialog.h
-    }
+#TouchImage.pro
+android {
+    QT += androidextras
+    SOURCES += model/androidfiledialog.cpp
+    HEADERS += model/androidfiledialog.h
+}
+!android {
+    SOURCES += model/qtfiledialog.cpp
+    HEADERS += model/qtfiledialog.h
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QList>
+#include <QElapsedTimer>
 #include "filter.h"
 #include "brush.h"
 
@@ -17,6 +18,7 @@ signals:
     void currentImageChanged(QImage *currentImage);
     void undoStatusChanged(bool enabled);
     void redoStatusChanged(bool enabled);
+    void operationFinished(int time);
 public slots:
     void doFilterAndAppend(Filter *filter);
     void doBrushAndAppend(Brush *brush, QPainterPath path);
@@ -29,6 +31,8 @@ private:
     typedef QList<QImage*>::Iterator Iterator;
     Iterator currentIterator;
     Filter *runningFilter;
+
+    QElapsedTimer timer;
 };
 
 #endif // HISTORYPROVIDER_H
