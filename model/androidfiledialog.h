@@ -2,11 +2,12 @@
 #define ANDROIDFILEDIALOG_H
 
 #include <QObject>
+#include "filedialogstrategy.h"
 #include <QAndroidJniObject>
 #include <QtAndroid>
 #include <QAndroidActivityResultReceiver>
 
-class AndroidFileDialog : public QObject
+class AndroidFileDialog : public FileDialogStrategy
 {
     Q_OBJECT
 
@@ -29,8 +30,6 @@ private:
     ResultReceiver *receiver;
     void emitExistingFileNameReady(QString result);
 
-signals:
-    void existingFileNameReady(QString result);
 };
 
 #endif // ANDROIDFILEDIALOG_H

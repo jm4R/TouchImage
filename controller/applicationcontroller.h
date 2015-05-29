@@ -16,8 +16,13 @@
 #include "toolsprovider.h"
 #include "view/toast.h"
 
-//MOCK{
+#ifdef Q_OS_ANDROID
 #include "model/androidfiledialog.h"
+#else
+#include "model/qtfiledialog.h"
+#endif
+
+//MOCK{
 #include "model/grayscalefilter.h"
 #include "model/brush.h"
 //}MOCK
@@ -48,7 +53,7 @@ private:
     ToolsProvider toolsProvider;
     HistoryProvider historyProvider;
     Toast toast;
-    AndroidFileDialog fileDialog;
+    FileDialogStrategy *fileDialog;
 
     //MOCK{
     Brush brush;

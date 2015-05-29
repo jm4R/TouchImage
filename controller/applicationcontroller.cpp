@@ -3,6 +3,7 @@
 #include "ui_rightmenuwidget.h"
 #include "model/settings.h"
 
+
 ApplicationController::ApplicationController(QApplication &_application, MainView &_mainView) :
       application(_application),
       mainView(_mainView),
@@ -15,6 +16,12 @@ ApplicationController::ApplicationController(QApplication &_application, MainVie
     File.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(File.readAll());
     application.setStyleSheet(styleSheet);
+
+    #ifdef Q_OS_ANDROID
+    fileDialog = new AndroidFileDialog(this);
+    #else
+    fileDialog = new QtFileDialog(this);
+    #endif
 }
 
 ApplicationController::~ApplicationController()
@@ -69,7 +76,7 @@ void ApplicationController::buildUI()
     connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAnialiasing(bool)));
     connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
 
-    connect(&fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
+    connect(fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
 
     //MOCK{
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
@@ -86,7 +93,7 @@ void ApplicationController::loadIcon(QToolButton *button, QString resourceName, 
 
 void ApplicationController::openFileButtonClicked()
 {
-    bool success = fileDialog.provideExistingFileName();
+    bool success = fileDialog->provideExistingFileName();
     if (!success) {
         //TODO error
     }

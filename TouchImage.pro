@@ -6,9 +6,15 @@
 
 QT       += core gui svg
 
-android {
-    QT += androidextras
-}
+    android {
+        QT += androidextras
+        SOURCES += model/androidfiledialog.cpp
+        HEADERS += model/androidfiledialog.h
+    }
+    !android {
+        SOURCES += model/qtfiledialog.cpp
+        HEADERS += model/qtfiledialog.h
+    }
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,7 +49,7 @@ SOURCES += main.cpp\
     view/toast.cpp \
     model/brush.cpp \
     model/settings.cpp \
-    model/androidfiledialog.cpp
+    model/filedialogstrategy.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -71,7 +77,7 @@ HEADERS  += view/mainview.h \
     view/toast.h \
     model/brush.h \
     model/settings.h \
-    model/androidfiledialog.h
+    model/filedialogstrategy.h
 
 CONFIG += mobility
 MOBILITY = 

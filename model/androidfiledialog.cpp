@@ -30,7 +30,7 @@ QString AndroidFileDialog::ResultReceiver::uriToPath(QAndroidJniObject uri)
     }
 }
 
-AndroidFileDialog::AndroidFileDialog(QObject *parent) : QObject(parent)
+AndroidFileDialog::AndroidFileDialog(QObject *parent) : FileDialogStrategy(parent)
 {
     receiver = new ResultReceiver(this);
 }
