@@ -9,7 +9,7 @@ ImageWidget {
     background-color : rgba(120,0,0,0);
 }
 .LeftMenuWidget, .RightMenuWidget, .FilterWidget, .BrushWidget, .ColorWidget {
-    background-color : rgba(0,0,0,220);
+    background-color : rgba(0,0,0,180);
 }
 .FilterWidget, .BrushWidget, .ColorWidget {
     border: 2px solid rgb(255,100,0);
@@ -37,6 +37,7 @@ QPushButton {
     color : white;
     border : 2px solid rgb(255,100,0);
     padding : 8px;
+    height : 1.4em;
 }
 QPushButton:pressed {
     background : rgb(128,128,128);
@@ -46,17 +47,17 @@ QSlider {
 }
 QSlider::groove:horizontal {
     border: none;
-    height: 0.1em; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    height: 0.1em;
     margin: 0.9em;
     background : white;
 }
 
 QSlider::handle:horizontal {
     border: 2px solid rgb(255,100,0);
-    margin: -0.7em 0em; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    margin: -0.7em 0em;
     width: 1.4em;
     border-radius: 0.7em;
-    background: rgba(255,100,0,128);
+    background: rgb(135,57,9);
 }
 
 QCheckBox {
@@ -68,9 +69,9 @@ QCheckBox {
 
 QCheckBox::indicator {
     border: 2px solid rgb(255,100,0);
-    width: 1.8em;
-    height: 1.8em;
-    border-radius: 0.9em;
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: 0.1em;
 }
 QCheckBox::indicator:checked {
     background: rgba(255,100,0,128);

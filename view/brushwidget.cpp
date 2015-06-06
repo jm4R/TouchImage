@@ -54,14 +54,20 @@ void BrushWidget::drawPreview(QPen pen, bool antialiasing)
     QSize size = ui->previewLabel->size();
     QPixmap previewPixmap(size);
 
-    QLinearGradient gradient(QPointF(0,0), QPoint(size.width(),0));
-    gradient.setColorAt(0, Qt::black);
-    gradient.setColorAt(1, Qt::white);
-    QBrush brush(gradient);
+    QBrush brush(Qt::SolidPattern);
+
+    QColor color = pen.color();
+    if (color.valueF() > 0.5) {
+        brush.setColor(QColor(0,0,0,0));
+    } else {
+        brush.setColor(QColor(255,153,85));
+    }
 
     QPainter painter(&previewPixmap);
     painter.setBrush(brush);
     painter.drawRect(0,0,size.width(),size.height());
+    brush.setColor(QColor(0,0,0,0));
+    painter.setBrush(brush);
 
     QPainterPath path(QPointF(size.width()*0.2, size.height()*0.1));
     path.lineTo(QPointF(size.width()*0.8, size.height()*0.1));
