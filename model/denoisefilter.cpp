@@ -2,7 +2,7 @@
 
 DenoiseFilter::DenoiseFilter()
 {
-
+    name = tr("Odszumianie");
 }
 
 DenoiseFilter::~DenoiseFilter()

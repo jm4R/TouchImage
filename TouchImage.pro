@@ -50,7 +50,12 @@ SOURCES += main.cpp\
     view/toast.cpp \
     model/brush.cpp \
     model/settings.cpp \
-    model/filedialogstrategy.cpp
+    model/filedialogstrategy.cpp \
+    model/lightnessfilter.cpp \
+    model/exposurefilter.cpp \
+    model/huefilter.cpp \
+    model/gammafilter.cpp \
+    model/gaussfilter.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -78,7 +83,12 @@ HEADERS  += view/mainview.h \
     view/toast.h \
     model/brush.h \
     model/settings.h \
-    model/filedialogstrategy.h
+    model/filedialogstrategy.h \
+    model/lightnessfilter.h \
+    model/exposurefilter.h \
+    model/huefilter.h \
+    model/gammafilter.h \
+    model/gaussfilter.h
 
 CONFIG += mobility
 MOBILITY = 
