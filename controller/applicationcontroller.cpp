@@ -37,10 +37,7 @@ void ApplicationController::buildUI()
     loadIcon(leftMenuWidget.ui->filtersButton, "filter.svg", 1.0f);
     loadIcon(leftMenuWidget.ui->colorsButton, "color.svg", 1.0f);
     loadIcon(leftMenuWidget.ui->hideButton, "leftArrow.svg", 0.4f);
-    connect(leftMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
-    connect(leftMenuWidget.ui->brushesButton, SIGNAL(clicked()), this, SLOT(brushesButtonClicked()));
-    connect(leftMenuWidget.ui->colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
-    connect(leftMenuWidget.ui->filtersButton, SIGNAL(clicked()), this, SLOT(filterButtonsClicked()));
+
     filterButtonsClicked();
 
     loadIcon(rightMenuWidget.ui->hideButton, "rightArrow.svg", 0.4f);
@@ -48,10 +45,6 @@ void ApplicationController::buildUI()
     loadIcon(rightMenuWidget.ui->redoButton, "redo.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->saveButton, "saveFile.svg", 1.0f);
     loadIcon(rightMenuWidget.ui->undoButton, "undo.svg", 1.0f);
-    connect(rightMenuWidget.ui->openButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
-    connect(rightMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
-    connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
-    connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
 
     int menuWidth = screenAdapter.cmToPx(2.5);
     drawersWidget.setLeftWidget(&leftMenuWidget, menuWidth);
@@ -62,37 +55,55 @@ void ApplicationController::buildUI()
 
     QImage exampleImage = screenAdapter.loadRaster(":/res/icons/example.jpg", 5.0f, 1.5f);
     filterWidget.putButtonGroup(toolsProvider.generateButtonGroup(exampleImage));
-    connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
-    connect(&filterWidget, SIGNAL(filterInvoked()), this, SLOT(filterInvoked()));
 
-    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &imageWidget, SLOT(setImage(QImage*)));
-    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &filterWidget, SLOT(setImage(QImage*)));
+}
+
+void ApplicationController::connectViewModel()
+{
+    //left menu:
+    connect(leftMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(leftMenuWidget.ui->brushesButton, SIGNAL(clicked()), this, SLOT(brushesButtonClicked()));
+    connect(leftMenuWidget.ui->colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
+    connect(leftMenuWidget.ui->filtersButton, SIGNAL(clicked()), this, SLOT(filterButtonsClicked()));
+
+    //right menu:
+    connect(rightMenuWidget.ui->openButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(rightMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
     connect(&historyProvider, SIGNAL(undoStatusChanged(bool)), rightMenuWidget.ui->undoButton, SLOT(setEnabled(bool)));
     connect(&historyProvider, SIGNAL(redoStatusChanged(bool)), rightMenuWidget.ui->redoButton, SLOT(setEnabled(bool)));
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &historyProvider, SLOT(redo()));
 
+    //filter widget:
+    connect(&toolsProvider, SIGNAL(currentFilterChanged(Filter*)), &filterWidget, SLOT(setFilter(Filter*)));
+    connect(&filterWidget, SIGNAL(filterInvoked()), this, SLOT(filterInvoked()));
+    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &filterWidget, SLOT(setImage(QImage*)));
+
+    //image widget:
+    connect(&historyProvider, SIGNAL(currentImageChanged(QImage*)), &imageWidget, SLOT(setImage(QImage*)));
+    connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
+    connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), this, SLOT(brushInvoked(QPainterPath)));
+
+    //color widget:
     connect(&colorWidget, SIGNAL(colorChanged(QColor)), &brushWidget, SLOT(setColor(QColor)));
+
+    //brush widget:
     connect(&brushWidget, SIGNAL(penChanged(QPen)), &Settings::instance(), SLOT(setPen(QPen)));
     connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAnialiasing(bool)));
-    connect(&imageWidget, SIGNAL(matrixChanged(QMatrix)), &Settings::instance(), SLOT(setTransformationMatrix(QMatrix)));
 
+    //open file dialog:
     connect(fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
 
+    //toast:
     connect(&historyProvider, SIGNAL(operationFinished(int)), this, SLOT(operationFinished(int)));
-    //MOCK{
-    connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
-    connect(&imageWidget, SIGNAL(pathDrawn(QPainterPath)), this, SLOT(brushInvoked(QPainterPath)));
-    //}MOCK
-}
-
-void ApplicationController::connectViewModel()
-{
-
 }
 
 void ApplicationController::setDefaults()
 {
+    colorWidget.setHsv(0,0,255);
 
 }
 
@@ -161,6 +172,8 @@ void ApplicationController::operationFinished(int time)
 int ApplicationController::executeApplication()
 {
     buildUI();
+    connectViewModel();
+    setDefaults();
 #ifndef Q_OS_ANDROID
     mainView.setMinimumSize(800, 600);
     mainView.show();

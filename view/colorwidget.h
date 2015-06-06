@@ -20,7 +20,7 @@ public:
 signals:
     void colorChanged(QColor color);
 
-private slots:
+public slots:
     void setHsv(int h, int s, int v);
 
 private:
