@@ -9,7 +9,7 @@ LeftMenuWidget::LeftMenuWidget(QWidget *parent) :
     buttonGroup.addButton(ui->brushesButton);
     buttonGroup.addButton(ui->colorsButton);
     buttonGroup.addButton(ui->filtersButton);
-    ui->brushesButton->setChecked(true);
+    ui->filtersButton->setChecked(true);
 }
 
 LeftMenuWidget::~LeftMenuWidget()

@@ -24,6 +24,29 @@
     <widget class="QWidget" name="widget" native="true">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Krycie</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="opacitySlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Szerokość:</string>
@@ -48,50 +71,19 @@
       </item>
       <item>
        <widget class="QCheckBox" name="cosmeticCheckBox">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string>Uwzględnij skalowanie</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Krycie</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSlider" name="opacitySlider">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>255</number>
-        </property>
-        <property name="value">
-         <number>255</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QCheckBox" name="antialiasingCheckBox">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string>Antyaliasing</string>
         </property>
@@ -102,6 +94,9 @@
       </item>
       <item>
        <widget class="QCheckBox" name="roundCheckBox">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string>Zaokrąglanie krawędzi</string>
         </property>

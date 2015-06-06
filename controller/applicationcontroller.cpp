@@ -41,6 +41,7 @@ void ApplicationController::buildUI()
     connect(leftMenuWidget.ui->brushesButton, SIGNAL(clicked()), this, SLOT(brushesButtonClicked()));
     connect(leftMenuWidget.ui->colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
     connect(leftMenuWidget.ui->filtersButton, SIGNAL(clicked()), this, SLOT(filterButtonsClicked()));
+    filterButtonsClicked();
 
     loadIcon(rightMenuWidget.ui->hideButton, "rightArrow.svg", 0.4f);
     loadIcon(rightMenuWidget.ui->openButton, "openFile.svg", 1.0f);
@@ -85,6 +86,16 @@ void ApplicationController::buildUI()
     //}MOCK
 }
 
+void ApplicationController::connectViewModel()
+{
+
+}
+
+void ApplicationController::setDefaults()
+{
+
+}
+
 void ApplicationController::loadIcon(QToolButton *button, QString resourceName, float sizeCm)
 {
     QPixmap iconPixmap = screenAdapter.loadSvg(":/res/icons/" + resourceName, sizeCm);
@@ -96,7 +107,7 @@ void ApplicationController::openFileButtonClicked()
 {
     bool success = fileDialog->provideExistingFileName();
     if (!success) {
-        //TODO error
+        toast.showToast(tr("Nie udało się otworzyć pliku"));
     }
 }
 
@@ -105,12 +116,12 @@ void ApplicationController::openFileNameReady(QString fileName)
 
     QImageReader reader(fileName);
     if (!reader.canRead()) {
-        return; //TODO error
+        toast.showToast(tr("Nie udało się otworzyć pliku"));
     }
 
     QImage *newImage = new QImage();
     if (!reader.read(newImage)) {
-        return; //TODO error
+        toast.showToast(tr("Nie udało się otworzyć pliku"));
     }
     historyProvider.resetToImage(newImage);
 }

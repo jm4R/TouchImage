@@ -61,6 +61,8 @@ private:
 
 
     void buildUI();
+    void connectViewModel();
+    void setDefaults();
     void loadIcon(QToolButton *button, QString resourceName, float sizeCm);
 
 public slots:

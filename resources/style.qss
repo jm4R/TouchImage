@@ -41,6 +41,45 @@ QPushButton {
 QPushButton:pressed {
     background : rgb(128,128,128);
 }
+QSlider {
+    height: 2em;
+}
+QSlider::groove:horizontal {
+    border: none;
+    height: 0.1em; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    margin: 0.9em;
+    background : white;
+}
+
+QSlider::handle:horizontal {
+    border: 2px solid rgb(255,100,0);
+    margin: -0.7em 0em; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    width: 1.4em;
+    border-radius: 0.7em;
+    background: rgba(255,100,0,128);
+}
+
+QCheckBox {
+    spacing: 0.5em;
+    height: 2em;
+    border: none;
+    margin: 0em 0.9em;
+}
+
+QCheckBox::indicator {
+    border: 2px solid rgb(255,100,0);
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 0.9em;
+}
+QCheckBox::indicator:checked {
+    background: rgba(255,100,0,128);
+}
+
+QCheckBox::indicator:unchecked {
+    background: rgba(0,0,0,0);
+}
+
 #colorFrame {
     background : none;
 }
