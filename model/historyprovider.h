@@ -19,6 +19,7 @@ signals:
     void undoStatusChanged(bool enabled);
     void redoStatusChanged(bool enabled);
     void operationFinished(int time);
+    void errorOccured(QString message);
 public slots:
     void doFilterAndAppend(Filter *filter);
     void doBrushAndAppend(Brush *brush, QPainterPath path);

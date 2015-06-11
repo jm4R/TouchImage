@@ -23,11 +23,15 @@ void HistoryProvider::resetToImage(QImage *newImage)
 
 void HistoryProvider::doFilterAndAppend(Filter *filter)
 {
+    if (list.isEmpty()) {
+        return;
+    }
     if (runningFilter == 0) {
         QImage *newImage = new QImage((*currentIterator)->copy());
         if (newImage->format() == QImage::Format_Invalid) {
             delete newImage;
-            return; //TODO: - nie ma pamieci
+            emit errorOccured(tr("Brak dostępnej pamięci do wykonania operacji"));
+            return;
         }
         filter->setImage(newImage);
         connect(filter, SIGNAL(ready()), this, SLOT(filterFinished()));
@@ -35,7 +39,7 @@ void HistoryProvider::doFilterAndAppend(Filter *filter)
         timer.start();
         filter->process();
     } else {
-        //TODO: info - 2 filters at time not allowed
+        emit errorOccured(tr("Poprzedni filtr nie został jeszcze nałożony"));
     }
 }
 
@@ -47,7 +51,8 @@ void HistoryProvider::doBrushAndAppend(Brush *brush, QPainterPath path)
     QImage *newImage = new QImage((*currentIterator)->copy());
     if (newImage->format() == QImage::Format_Invalid) {
         delete newImage;
-        return; //TODO: - nie ma pamieci
+        emit errorOccured(tr("Brak dostępnej pamięci do wykonania operacji"));
+        return;
     }
     brush->setImage(newImage);
     brush->process(path);

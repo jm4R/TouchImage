@@ -15,6 +15,8 @@ public:
 
 public slots:
     void setImage(QImage *image);
+    void setPen(QPen value);
+    void setAntialiasing(bool value);
 
 protected:
     bool event(QEvent *event);
@@ -43,6 +45,8 @@ private:
 
     QPainterPath *path;
     QPoint startPoint;
+    QPen pen;
+    bool antialiasing;
 
 signals:
     void gestureFinished();

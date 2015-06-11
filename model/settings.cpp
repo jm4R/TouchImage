@@ -25,14 +25,14 @@ void Settings::setTransformationMatrix(QMatrix value)
 {
     transformationMatrix = value;
 }
-bool Settings::getAnialiasing() const
+bool Settings::getAntialiasing() const
 {
-    return anialiasing;
+    return antialiasing;
 }
 
-void Settings::setAnialiasing(bool value)
+void Settings::setAntialiasing(bool value)
 {
-    anialiasing = value;
+    antialiasing = value;
 }
 
 QPen Settings::getPen() const

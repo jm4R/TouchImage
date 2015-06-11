@@ -15,17 +15,17 @@ public:
 
     QMatrix getTransformationMatrix() const;
     QPen getPen() const;
-    bool getAnialiasing() const;
+    bool getAntialiasing() const;
 
 public slots:
     void setTransformationMatrix(QMatrix value);
     void setPen(QPen value);
-    void setAnialiasing(bool value);
+    void setAntialiasing(bool value);
 
 private:
     QMatrix transformationMatrix;
     QPen pen;
-    bool anialiasing;
+    bool antialiasing;
 
     Settings();
     Settings(Settings const&) = delete;

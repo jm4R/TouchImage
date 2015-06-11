@@ -39,6 +39,8 @@ void ImageWidget::paintEvent(QPaintEvent *event)
     p.setMatrix(m);
     p.drawImage(0, 0, *currentImage);
     if (path) {
+        p.setPen(pen);
+        p.setRenderHint(QPainter::Antialiasing, antialiasing);
         p.setMatrixEnabled(false);
         p.drawPath(*path);
     }
@@ -142,4 +144,14 @@ void ImageWidget::setImage(QImage *image)
 {
     currentImage = image;
     update();
+}
+
+void ImageWidget::setPen(QPen value)
+{
+    pen = value;
+}
+
+void ImageWidget::setAntialiasing(bool value)
+{
+    antialiasing = value;
 }

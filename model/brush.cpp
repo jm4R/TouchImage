@@ -26,7 +26,7 @@ void Brush::process(QPainterPath path)
     Settings &s = Settings::instance();
     QPainter painter(image);
     painter.setMatrix(s.getTransformationMatrix());
-    painter.setRenderHint(QPainter::Antialiasing, s.getAnialiasing());
+    painter.setRenderHint(QPainter::Antialiasing, s.getAntialiasing());
     painter.setPen(s.getPen());
     painter.drawPath(path);
 }

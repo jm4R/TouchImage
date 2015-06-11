@@ -28,6 +28,8 @@ private:
     void drawPreview(QPen pen, bool antialiasing);
     Ui::BrushWidget *ui;
     QColor color;
+    QSize size;
+    QPainterPath path;
 
 private slots:
     void updatePen();

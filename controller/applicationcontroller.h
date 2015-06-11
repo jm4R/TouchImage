@@ -22,11 +22,6 @@
 #include "model/qtfiledialog.h"
 #endif
 
-//MOCK{
-#include "model/grayscalefilter.h"
-#include "model/brush.h"
-//}MOCK
-
 
 class ApplicationController : public QObject
 {
@@ -55,30 +50,25 @@ private:
     Toast toast;
     FileDialogStrategy *fileDialog;
 
-    //MOCK{
-    Brush brush;
-    //}MOCK
-
-
     void buildUI();
     void connectViewModel();
     void setDefaults();
     void loadIcon(QToolButton *button, QString resourceName, float sizeCm);
 
 public slots:
-    //TODO temp
-    void openFileButtonClicked();
 
-    //{MOCK
     void openFileNameReady(QString fileName);
-    //}MOCK
 
     void brushesButtonClicked();
     void colorsButtonClicked();
     void filterButtonsClicked();
+    void openFileButtonClicked();
     void filterInvoked();
     void brushInvoked(QPainterPath path);
     void operationFinished(int time);
+
+private slots:
+    void showMessage(QString message);
 };
 
 #endif // APPLICATIONaa_H

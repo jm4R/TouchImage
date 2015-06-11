@@ -92,13 +92,16 @@ void ApplicationController::connectViewModel()
 
     //brush widget:
     connect(&brushWidget, SIGNAL(penChanged(QPen)), &Settings::instance(), SLOT(setPen(QPen)));
-    connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAnialiasing(bool)));
+    connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &Settings::instance(), SLOT(setAntialiasing(bool)));
+    connect(&brushWidget, SIGNAL(penChanged(QPen)), &imageWidget, SLOT(setPen(QPen)));
+    connect(&brushWidget, SIGNAL(antialiasingChanged(bool)), &imageWidget, SLOT(setAntialiasing(bool)));
 
     //open file dialog:
     connect(fileDialog, SIGNAL(existingFileNameReady(QString)), this, SLOT(openFileNameReady(QString)));
 
     //toast:
     connect(&historyProvider, SIGNAL(operationFinished(int)), this, SLOT(operationFinished(int)));
+    connect(&historyProvider, SIGNAL(errorOccured(QString)), this, SLOT(showMessage(QString)));
 }
 
 void ApplicationController::setDefaults()
@@ -167,6 +170,11 @@ void ApplicationController::brushInvoked(QPainterPath path)
 void ApplicationController::operationFinished(int time)
 {
     toast.showToast(QString::number(time) + "ms");
+}
+
+void ApplicationController::showMessage(QString message)
+{
+    toast.showToast(message);
 }
 
 int ApplicationController::executeApplication()

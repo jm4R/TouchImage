@@ -51,31 +51,24 @@ QPen BrushWidget::generatePen()
 
 void BrushWidget::drawPreview(QPen pen, bool antialiasing)
 {
-    QSize size = ui->previewLabel->size();
+    if (size != ui->previewLabel->size()) {
+        size = ui->previewLabel->size();
+        path = QPainterPath(QPointF(size.width()*0.2, size.height()*0.1));
+        path.lineTo(QPointF(size.width()*0.8, size.height()*0.1));
+        path.lineTo(QPointF(size.width()*0.2, size.height()*0.4));
+        path.lineTo(QPointF(size.width()*0.5, size.height()*0.5));
+        path.lineTo(QPointF(size.width()*0.7, size.height()*0.6));
+        path.lineTo(QPointF(size.width()*0.8, size.height()*0.8));
+    }
     QPixmap previewPixmap(size);
-
-    QBrush brush(Qt::SolidPattern);
-
     QColor color = pen.color();
     if (color.valueF() > 0.5) {
-        brush.setColor(QColor(0,0,0,0));
+        previewPixmap.fill(QColor(0,0,0,0));
     } else {
-        brush.setColor(QColor(255,153,85));
+        previewPixmap.fill(QColor(255,153,85));
     }
 
     QPainter painter(&previewPixmap);
-    painter.setBrush(brush);
-    painter.drawRect(0,0,size.width(),size.height());
-    brush.setColor(QColor(0,0,0,0));
-    painter.setBrush(brush);
-
-    QPainterPath path(QPointF(size.width()*0.2, size.height()*0.1));
-    path.lineTo(QPointF(size.width()*0.8, size.height()*0.1));
-    path.lineTo(QPointF(size.width()*0.2, size.height()*0.4));
-    path.lineTo(QPointF(size.width()*0.5, size.height()*0.5));
-    path.lineTo(QPointF(size.width()*0.7, size.height()*0.6));
-    path.lineTo(QPointF(size.width()*0.8, size.height()*0.8));
-
     painter.setPen(pen);
     painter.setRenderHint(painter.Antialiasing, antialiasing);
 

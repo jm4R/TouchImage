@@ -76,6 +76,7 @@ void ToolsProvider::changeCurrentFilter(int id)
     currentFilter = filters[id];
     emit currentFilterChanged(currentFilter);
 }
+
 Filter *ToolsProvider::getCurrentFilter() const
 {
     return currentFilter;
@@ -83,9 +84,9 @@ Filter *ToolsProvider::getCurrentFilter() const
 
 Brush *ToolsProvider::getCurrentBrush() const
 {
-    //{MOCK
+    //{TODO: diferent brushes?
     static Brush brush;
     return &brush;
-    //}MOCK
+    //}TODO
 }
 
