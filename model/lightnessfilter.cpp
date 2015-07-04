@@ -15,14 +15,28 @@ LightnessFilter::~LightnessFilter()
 
 uint LightnessFilter::processPixel(uint pixel)
 {
+    int toAdd = (int) (- 255 + (510.0 * parameter / 1000));
     QColor color(pixel);
 
-    int newLightness = color.lightness() - 255 + (510.0 * parameter / 1000);
-    if (newLightness > 255) {
-        newLightness=255;
-    } else if (newLightness < 0) {
-        newLightness = 0;
+    int newR = color.red() + toAdd;
+    int newG = color.green() + toAdd;
+    int newB = color.blue() + toAdd;
+    if (newR > 255) {
+        newR=255;
+    } else if (newR < 0) {
+        newR = 0;
     }
-    color.setHsl(color.hslHue(), color.hslSaturation(), newLightness);
+    if (newG > 255) {
+        newG=255;
+    } else if (newG < 0) {
+        newG = 0;
+    }
+    if (newB > 255) {
+        newB=255;
+    } else if (newB < 0) {
+        newB = 0;
+    }
+
+    color.setRgb(newR, newG, newB);
     return color.rgb();
 }

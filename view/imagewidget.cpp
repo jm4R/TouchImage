@@ -4,8 +4,6 @@
 
 ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent),
-
-    position(0),
     currentImage(0),
     horizontalOffset(0),
     verticalOffset(0),
@@ -61,7 +59,6 @@ void ImageWidget::mousePressEvent(QMouseEvent *event)
 {
     delete path;
     path = new QPainterPath(event->pos());
-    startPoint = event->pos();
 }
 
 void ImageWidget::mouseMoveEvent(QMouseEvent *event)

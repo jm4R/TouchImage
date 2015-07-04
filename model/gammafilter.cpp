@@ -15,11 +15,16 @@ GammaFilter::~GammaFilter()
 uint GammaFilter::processPixel(uint pixel)
 {
     QColor color(pixel);
+    double r = color.red() / 255.;
+    double g = color.green() / 255.;
+    double b = color.blue() / 255.;
 
     double f = -3.0 + (6.0 * parameter / 1000);
     double gamma = pow(2,f);
-    double newLightness = pow(color.lightnessF(), gamma);
-    color.setHsl(color.hslHue(), color.hslSaturation(), newLightness*255);
+    r = pow(r, gamma);
+    g = pow(g, gamma);
+    b = pow(b, gamma);
+    color.setRgb(r*255,g*255,b*255);
     return color.rgb();
 }
 

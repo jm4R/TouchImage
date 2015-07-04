@@ -34,9 +34,6 @@ private:
     void updateImage();
     QMatrix calculateMatrix();
 
-
-    int position;
-
     QImage *currentImage;
 
     qreal horizontalOffset;
@@ -44,7 +41,6 @@ private:
     qreal scaleFactor;
 
     QPainterPath *path;
-    QPoint startPoint;
     QPen pen;
     bool antialiasing;
 
