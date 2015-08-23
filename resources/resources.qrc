@@ -11,5 +11,6 @@
         <file>icons/saveFile.svg</file>
         <file>icons/undo.svg</file>
         <file>icons/example.jpg</file>
+        <file>translations/translation_pl_PL.qm</file>
     </qresource>
 </RCC>

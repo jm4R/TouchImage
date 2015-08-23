@@ -106,4 +106,11 @@ FORMS += \
 CONFIG += c++11
 
 DISTFILES += \
-    resources/TODO.txt
+    resources/TODO.txt \
+    android/AndroidManifest.xml \
+    android/res/values/libs.xml \
+    android/build.gradle
+
+TRANSLATIONS = translations/translation_pl_PL.ts
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

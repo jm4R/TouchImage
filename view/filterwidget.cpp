@@ -10,10 +10,6 @@ FilterWidget::FilterWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     QScroller::grabGesture(ui->menuScrollArea, QScroller::LeftMouseButtonGesture);
-    scroller = QScroller::scroller(this);
-    QScrollerProperties scrollerProperties;
-    scrollerProperties.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
-    scroller->setScrollerProperties(scrollerProperties);
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(filterInvoked()));
     connect(ui->horizontalSlider, SIGNAL(sliderReleased()), this, SLOT(changeParameterValue()));
 }

@@ -5,17 +5,19 @@
 
 
 ApplicationController::ApplicationController(QApplication &_application, MainView &_mainView) :
+      QObject(&_application),
       application(_application),
       mainView(_mainView),
-      drawersWidget(&mainView),
-      imageWidget(&mainView),
-      leftMenuWidget(&mainView),
-      toast (&_mainView)
+      drawersWidget(&_mainView),
+      imageWidget(&drawersWidget),
+      leftMenuWidget(&drawersWidget),
+      toast (&drawersWidget)
 {
-    QFile File(":/res/style.qss");
-    File.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(File.readAll());
-    application.setStyleSheet(styleSheet);
+    QFile styleFile(":/res/style.qss");
+    styleFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleFile.readAll());
+    qApp->setStyleSheet(styleSheet);
+    styleFile.close();
 
     #ifdef Q_OS_ANDROID
     fileDialog = new AndroidFileDialog(this);
@@ -121,7 +123,7 @@ void ApplicationController::openFileButtonClicked()
 {
     bool success = fileDialog->provideExistingFileName();
     if (!success) {
-        toast.showToast(tr("Nie udało się otworzyć pliku"));
+        toast.showToast(tr("Failed to open file"));
     }
 }
 
@@ -130,12 +132,12 @@ void ApplicationController::openFileNameReady(QString fileName)
 
     QImageReader reader(fileName);
     if (!reader.canRead()) {
-        toast.showToast(tr("Nie udało się otworzyć pliku"));
+        toast.showToast(tr("Failed to open file"));
     }
 
     QImage *newImage = new QImage();
     if (!reader.read(newImage)) {
-        toast.showToast(tr("Nie udało się otworzyć pliku"));
+        toast.showToast(tr("Failed to open file"));
     }
     historyProvider.resetToImage(newImage);
 }
@@ -183,7 +185,7 @@ int ApplicationController::executeApplication()
     connectViewModel();
     setDefaults();
 #ifndef Q_OS_ANDROID
-    mainView.setMinimumSize(800, 600);
+    mainView.setMinimumSize(960, 540);
     mainView.show();
 #else
     mainView.setWindowState( mainView.windowState()| Qt::WindowFullScreen);

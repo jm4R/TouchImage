@@ -38,7 +38,6 @@ private:
     Ui::FilterWidget *ui;
     Filter *filter;
     const QImage *image;
-    QScroller *scroller;
 };
 
 #endif // FILTERWIDGET_H
