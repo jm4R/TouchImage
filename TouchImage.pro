@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg
+QT       += core gui svg testlib
 
 #TouchImage.pro
 android {
@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     model/exposurefilter.cpp \
     model/huefilter.cpp \
     model/gammafilter.cpp \
-    model/gaussfilter.cpp
+    model/gaussfilter.cpp \
+    tests/historyprovidertest.cpp
 
 HEADERS  += view/mainview.h \
     view/drawerswidget.h \
@@ -88,7 +89,8 @@ HEADERS  += view/mainview.h \
     model/exposurefilter.h \
     model/huefilter.h \
     model/gammafilter.h \
-    model/gaussfilter.h
+    model/gaussfilter.h \
+    tests/historyprovidertest.h
 
 CONFIG += mobility
 MOBILITY = 

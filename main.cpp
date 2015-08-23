@@ -1,8 +1,18 @@
 #include "controller/applicationcontroller.h"
 #include "view/mainview.h"
 
+#include "tests/historyprovidertest.h"
+
+//#define RUN_TESTS
+
 int main(int argc, char *argv[])
 {
+#ifdef RUN_TESTS
+    HistoryProviderTest *test = new HistoryProviderTest();
+    QTest::qExec(test);
+    delete test;
+#endif
+
     QApplication qtApplication(argc, argv);
 
     QTranslator translator;
