@@ -14,6 +14,7 @@ public:
     explicit HistoryProvider(QObject *parent = 0);
     ~HistoryProvider();
     void resetToImage(QImage *newImage);
+    QImage *getCurrentImage();
 signals:
     void currentImageChanged(QImage *currentImage);
     void undoStatusChanged(bool enabled);

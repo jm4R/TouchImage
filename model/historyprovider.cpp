@@ -21,6 +21,11 @@ void HistoryProvider::resetToImage(QImage *newImage)
     emit redoStatusChanged(false);
 }
 
+QImage *HistoryProvider::getCurrentImage()
+{
+    return *currentIterator;
+}
+
 void HistoryProvider::doFilterAndAppend(Filter *filter)
 {
     if (list.isEmpty()) {

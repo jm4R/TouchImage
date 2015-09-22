@@ -70,10 +70,12 @@ void ApplicationController::connectViewModel()
 
     //right menu:
     connect(rightMenuWidget.ui->openButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
+    connect(rightMenuWidget.ui->saveButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->hideButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->redoButton, SIGNAL(clicked()), &drawersWidget, SLOT(hideDrawers()));
     connect(rightMenuWidget.ui->openButton, &QToolButton::clicked, this, &ApplicationController::openFileButtonClicked);
+    connect(rightMenuWidget.ui->saveButton, &QToolButton::clicked, this, &ApplicationController::saveFileButtonClicked);
     connect(&historyProvider, SIGNAL(undoStatusChanged(bool)), rightMenuWidget.ui->undoButton, SLOT(setEnabled(bool)));
     connect(&historyProvider, SIGNAL(redoStatusChanged(bool)), rightMenuWidget.ui->redoButton, SLOT(setEnabled(bool)));
     connect(rightMenuWidget.ui->undoButton, SIGNAL(clicked()), &historyProvider, SLOT(undo()));
@@ -124,6 +126,24 @@ void ApplicationController::openFileButtonClicked()
     bool success = fileDialog->provideExistingFileName();
     if (!success) {
         toast.showToast(tr("Failed to open file"));
+    }
+}
+
+void ApplicationController::saveFileButtonClicked()
+{
+    QImage *currentImage = historyProvider.getCurrentImage();
+    if (currentImage) {
+        QString dirPath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        QString fileName = QDateTime::currentDateTime().toString("TouchImage_yyMMdd_hhmmss.png");
+        QString fullPath = dirPath + "/" + fileName;
+        bool success = currentImage->save(fullPath);
+        if (!success) {
+            toast.showToast(tr("Failed to save file"));
+        } else {
+            toast.showToast(fileName + tr(" saved"));
+        }
+    } else {
+        toast.showToast(tr("Nothing to save"));
     }
 }
 

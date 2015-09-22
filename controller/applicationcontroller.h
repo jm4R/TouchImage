@@ -63,6 +63,7 @@ public slots:
     void colorsButtonClicked();
     void filterButtonsClicked();
     void openFileButtonClicked();
+    void saveFileButtonClicked();
     void filterInvoked();
     void brushInvoked(QPainterPath path);
     void operationFinished(int time);
