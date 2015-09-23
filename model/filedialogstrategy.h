@@ -3,6 +3,11 @@
 
 #include <QObject>
 
+/**
+ * @brief
+ * Klasa abstrakcyjna, której szczegółowe implementacje odpowiadają za wyświetlanie dialogu otwarcia pliku.
+ * @sa QtFileDialog AndroidFileDialog
+ */
 class FileDialogStrategy : public QObject
 {
     Q_OBJECT

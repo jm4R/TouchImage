@@ -84,9 +84,7 @@ Filter *ToolsProvider::getCurrentFilter() const
 
 Brush *ToolsProvider::getCurrentBrush() const
 {
-    //{TODO: diferent brushes?
     static Brush brush;
     return &brush;
-    //}TODO
 }
 

@@ -7,6 +7,11 @@
 #include <QtAndroid>
 #include <QAndroidActivityResultReceiver>
 
+/**
+ * @brief
+ * Klasa służąca do wywoływania natywnego dialogu wyboru pliku w systemie Android.
+ * @sa FileDialogStrategy
+ */
 class AndroidFileDialog : public FileDialogStrategy
 {
     Q_OBJECT

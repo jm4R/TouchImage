@@ -7,6 +7,10 @@
 #include <QPixmap>
 #include <cfloat>
 
+/**
+ * @brief
+ * Klasa odpowiadająca za dostosowanie widoków aplikacji do używanego wyświetlacza.
+ */
 class ScreenAdapter : public QObject
 {
     Q_OBJECT

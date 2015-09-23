@@ -5,6 +5,11 @@
 #include <QColor>
 #include "filter.h"
 
+/**
+ * @brief
+ * Klasa abstrakcyjna odpowiedzialna za działanie filtrów, działających na podstawie koloru przetwarzanego piksela.
+ * @sa Filter SplotFilter
+ */
 class ColorFilter : public Filter
 {
     Q_OBJECT

@@ -11,6 +11,10 @@ namespace Ui {
 class FilterWidget;
 }
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem wyboru i nakładania filtrów.
+ */
 class FilterWidget : public QFrame
 {
     Q_OBJECT

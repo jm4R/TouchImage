@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QPainter>
 
+/**
+ * @brief
+ * Klasa odpowiedzialna za rysowanie po obrazie.
+ */
 class Brush : public QObject
 {
     Q_OBJECT

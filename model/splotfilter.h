@@ -2,7 +2,11 @@
 #define SPLOTFILTER_H
 #include "filter.h"
 
-
+/**
+ * @brief
+ * Klasa abstrakcyjna, służąca do nakładania na obraz różnego rodzaju filtrów splotowych.
+ * @sa Filter ColorFilter
+ */
 class SplotFilter : public Filter
 {
 public:

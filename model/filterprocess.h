@@ -7,6 +7,11 @@ class FilterProcess;
 #include <QImage>
 #include "filter.h"
 
+/**
+ * @brief
+ * Klasa odpowiadająca za zarządzanie pojedyńczym wątkiem podczas nakładania filtra przez pochodne klasy Filter.
+ * @sa Filter
+ */
 class FilterProcess : public QObject
 {
     Q_OBJECT

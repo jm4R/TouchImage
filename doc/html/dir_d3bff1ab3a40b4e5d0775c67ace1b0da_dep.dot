@@ -1,0 +1,6 @@
+digraph "controller" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_d3bff1ab3a40b4e5d0775c67ace1b0da [shape=box, label="controller", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_d3bff1ab3a40b4e5d0775c67ace1b0da.html"];
+}

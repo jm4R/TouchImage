@@ -1,7 +1,0 @@
-* ifdef dla FileDialogów w zależności od OS
-* Poprawa GUI dla checkbox, slider
-* Ustawienie wartości domyślnych ustawień
-* Poprawki w widgetach (nie chowa się po otwarciu plików, widget koloru po zmianie zakładki świruje)
-* Zapis do pliku
-* pomiar czasu wykonywania filtra
-* ewentualnie obsługa aplikacji aparatu

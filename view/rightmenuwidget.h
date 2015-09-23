@@ -7,6 +7,10 @@ namespace Ui {
 class RightMenuWidget;
 }
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem prawego menu aplikacji.
+ */
 class RightMenuWidget : public QFrame
 {
     Q_OBJECT

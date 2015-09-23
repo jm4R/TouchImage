@@ -1,0 +1,6 @@
+digraph "qt_lgpl_utils" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_45e1836557669eb14e6926f07ba54040 [shape=box, label="qt_lgpl_utils", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_45e1836557669eb14e6926f07ba54040.html"];
+}

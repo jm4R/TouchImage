@@ -4,6 +4,11 @@
 #include "../model/historyprovider.h"
 #include <QTest>
 
+/**
+ * @brief
+ * Test klasy HistoryProvider.
+ * @sa HistoryProvider
+ */
 class HistoryProviderTest : public QObject
 {
     Q_OBJECT

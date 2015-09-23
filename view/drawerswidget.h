@@ -6,6 +6,10 @@
 #include <QScroller>
 #include <QProgressBar>
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem szufladek bocznych.
+ */
 class DrawersWidget : public QWidget
 {
     Q_OBJECT

@@ -3,6 +3,11 @@
 
 #include "colorfilter.h"
 
+/**
+ * @brief
+ * Klasa służąca do nakładania na obraz filtra negatywu.
+ * @sa Filter ColorFilter
+ */
 class NegativeFilter : public ColorFilter
 {
 public:

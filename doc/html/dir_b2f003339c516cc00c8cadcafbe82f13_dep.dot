@@ -1,0 +1,6 @@
+digraph "view" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_b2f003339c516cc00c8cadcafbe82f13 [shape=box, label="view", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_b2f003339c516cc00c8cadcafbe82f13.html"];
+}

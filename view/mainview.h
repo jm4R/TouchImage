@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem głównego okna/widoku aplikacji.
+ */
 class MainView : public QMainWindow
 {
     Q_OBJECT

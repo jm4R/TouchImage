@@ -2,6 +2,11 @@
 #define DENOISEFILTER_H
 #include "splotfilter.h"
 
+/**
+ * @brief
+ * Klasa służąca do nakładania na obraz filtra odszumiającego (medianowego).
+ * @sa Filter SplotFilter
+ */
 class DenoiseFilter : public SplotFilter
 {
 public:

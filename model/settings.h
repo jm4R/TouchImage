@@ -6,6 +6,10 @@
 #include <QColor>
 #include <QPen>
 
+/**
+ * @brief
+ * Klasa służąca do przetrzymywania ustawień rysowania.
+ */
 class Settings : public QObject
 {
     Q_OBJECT

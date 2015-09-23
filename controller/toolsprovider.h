@@ -9,6 +9,10 @@
 #include "model/brush.h"
 #include "model/grayscalefilter.h"
 
+/**
+ * @brief
+ * Klasa służąca do inicjalizowania i zarządzania zestawem dostępnych narzędzi.
+ */
 class ToolsProvider : public QObject
 {
     Q_OBJECT

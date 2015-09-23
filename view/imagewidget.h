@@ -5,6 +5,10 @@
 #include <QImage>
 #include <QtWidgets>
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem głównego widoku edytowanej grafiki.
+ */
 class ImageWidget : public QWidget
 {
     Q_OBJECT

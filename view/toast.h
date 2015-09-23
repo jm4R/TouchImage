@@ -5,6 +5,10 @@
 #include <QLabel>
 #include <QTimer>
 
+/**
+ * @brief
+ * Klasa odpowiadająca za zarządzanie widżetem wyświetlania krótkich informacji statusu aplikacji.
+ */
 class Toast : public QObject
 {
     Q_OBJECT

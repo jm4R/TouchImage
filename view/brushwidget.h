@@ -9,6 +9,10 @@ namespace Ui {
 class BrushWidget;
 }
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem konfiguracji rysowania.
+ */
 class BrushWidget : public QFrame
 {
     Q_OBJECT

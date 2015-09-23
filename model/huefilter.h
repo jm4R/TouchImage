@@ -3,6 +3,11 @@
 
 #include "colorfilter.h"
 
+/**
+ * @brief
+ * Klasa służąca do nakładania na obraz filtra zmiany odcienia zdjęcia.
+ * @sa Filter ColorFilter
+ */
 class HueFilter : public ColorFilter
 {
 public:

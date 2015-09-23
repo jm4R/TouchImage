@@ -9,6 +9,10 @@ namespace Ui {
 class ColorWidget;
 }
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem wyboru koloru.
+ */
 class ColorWidget : public QFrame
 {
     Q_OBJECT

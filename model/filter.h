@@ -7,6 +7,12 @@ class Filter;
 #include <QMutex>
 #include "filterprocess.h"
 
+/**
+ * @brief
+ * Klasa abstrakcyjna, której szczegółowe implementacje odpowiadają za nakładanie filtra.
+ * Klasa ta zapewnia działanie wielowątkowe, a jej działanie jest transparentne dla podklas.
+ * @sa FilterProcess
+ */
 class Filter : public QObject
 {
     Q_OBJECT

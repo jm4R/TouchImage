@@ -3,6 +3,11 @@
 
 #include "colorfilter.h"
 
+/**
+ * @brief
+ * Klasa służąca do nakładania na obraz filtra symulacji zmiany jasności zdjęcia.
+ * @sa Filter ColorFilter
+ */
 class LightnessFilter : public ColorFilter
 {
 public:

@@ -3,6 +3,10 @@
 
 #include "filedialogstrategy.h"
 
+/**
+ * @brief
+ * Klasa służąca do wyświetlania dialogu otwarcia pliku na systemach desktopowych.
+ */
 class QtFileDialog : public FileDialogStrategy
 {
 public:

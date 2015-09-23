@@ -22,7 +22,10 @@
 #include "model/qtfiledialog.h"
 #endif
 
-
+/**
+ * @brief
+ * Klasa służąca do przygotowania aplikacji – połączenia odpowiednich widoków z akcjami w warstwie modelu.
+ */
 class ApplicationController : public QObject
 {
     Q_OBJECT

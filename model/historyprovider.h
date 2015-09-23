@@ -7,6 +7,10 @@
 #include "filter.h"
 #include "brush.h"
 
+/**
+ * @brief
+ * Klasa służąca do przetrzymywania i zarządzania historią edycji grafiki.
+ */
 class HistoryProvider : public QObject
 {
     Q_OBJECT

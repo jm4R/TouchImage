@@ -8,6 +8,10 @@ namespace Ui {
 class LeftMenuWidget;
 }
 
+/**
+ * @brief
+ * Klasa odpowiadająca za wyświetlanie i zarządzanie widżetem lewego menu aplikacji.
+ */
 class LeftMenuWidget : public QFrame
 {
     Q_OBJECT
